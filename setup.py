@@ -12,7 +12,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     package_dir={"": "rentman_api_client"},
-    packages=find_packages(where="rentman_api_client"),
+    packages=find_packages(),
     python_requires=">=3.6, <4",
     install_requires=["httpx >= 0.15.0, < 0.19.0", "attrs >= 20.1.0", "python-dateutil >= 2.8.0, < 3"],
     package_data={"": ["CHANGELOG.md"], "rentman_api_client": ["py.typed"]},
