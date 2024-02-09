@@ -3,7 +3,6 @@ from typing import Any, Dict, Optional, Union
 import httpx
 
 from ...client import Client
-from ...models.equipment_collection_get_filter import EquipmentCollectionGetFilter
 from ...models.equipment_collectionget_response_schema import EquipmentCollectiongetResponseSchema
 from ...types import UNSET, Response, Unset
 
@@ -11,7 +10,6 @@ from ...types import UNSET, Response, Unset
 def _get_kwargs(
     *,
     client: Client,
-    filter_: Union[Unset, EquipmentCollectionGetFilter] = UNSET,
     offset: Union[Unset, int] = 0,
     limit: Union[Unset, int] = 300,
 ) -> Dict[str, Any]:
@@ -20,16 +18,10 @@ def _get_kwargs(
     headers: Dict[str, Any] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
-    json_filter_: Union[Unset, Dict[str, Any]] = UNSET
-    if not isinstance(filter_, Unset):
-        json_filter_ = filter_.to_dict()
-
     params: Dict[str, Any] = {
         "offset": offset,
         "limit": limit,
     }
-    if not isinstance(json_filter_, Unset):
-        params.update(json_filter_)
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
     return {
@@ -61,13 +53,11 @@ def _build_response(*, response: httpx.Response) -> Response[EquipmentCollection
 def sync_detailed(
     *,
     client: Client,
-    filter_: Union[Unset, EquipmentCollectionGetFilter] = UNSET,
     offset: Union[Unset, int] = 0,
     limit: Union[Unset, int] = 300,
 ) -> Response[EquipmentCollectiongetResponseSchema]:
     kwargs = _get_kwargs(
         client=client,
-        filter_=filter_,
         offset=offset,
         limit=limit,
     )
@@ -82,7 +72,6 @@ def sync_detailed(
 def sync(
     *,
     client: Client,
-    filter_: Union[Unset, EquipmentCollectionGetFilter] = UNSET,
     offset: Union[Unset, int] = 0,
     limit: Union[Unset, int] = 300,
 ) -> Optional[EquipmentCollectiongetResponseSchema]:
@@ -90,7 +79,6 @@ def sync(
 
     return sync_detailed(
         client=client,
-        filter_=filter_,
         offset=offset,
         limit=limit,
     ).parsed
@@ -99,13 +87,11 @@ def sync(
 async def asyncio_detailed(
     *,
     client: Client,
-    filter_: Union[Unset, EquipmentCollectionGetFilter] = UNSET,
     offset: Union[Unset, int] = 0,
     limit: Union[Unset, int] = 300,
 ) -> Response[EquipmentCollectiongetResponseSchema]:
     kwargs = _get_kwargs(
         client=client,
-        filter_=filter_,
         offset=offset,
         limit=limit,
     )
@@ -119,7 +105,6 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Client,
-    filter_: Union[Unset, EquipmentCollectionGetFilter] = UNSET,
     offset: Union[Unset, int] = 0,
     limit: Union[Unset, int] = 300,
 ) -> Optional[EquipmentCollectiongetResponseSchema]:
@@ -128,7 +113,6 @@ async def asyncio(
     return (
         await asyncio_detailed(
             client=client,
-            filter_=filter_,
             offset=offset,
             limit=limit,
         )

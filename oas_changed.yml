@@ -42407,14 +42407,6 @@ paths:
       operationId: Equipment_collection_get
       parameters:
       - in: query
-        name: filter
-        schema:
-          type: object
-          properties:
-            status:
-              type: string
-              enum: [offen, geschlossen, inBearbeitung]
-      - in: query
         name: offset
         schema:
           type: integer
