@@ -7,7 +7,7 @@ First, create a client:
 ```python
 from rentman_api_client import Client
 
-client = Client(base_url="https://api.rentman.net/")
+client = Client(base_url="https://api.rentman.net")
 ```
 
 If the endpoints you're going to hit require authentication, use `AuthenticatedClient` instead:
@@ -15,7 +15,7 @@ If the endpoints you're going to hit require authentication, use `AuthenticatedC
 ```python
 from rentman_api_client import AuthenticatedClient
 
-client = AuthenticatedClient(base_url="https://api.rentman.net/", token="SuperSecretToken")
+client = AuthenticatedClient(base_url="https://api.rentman.net", token="SuperSecretToken")
 ```
 
 Now call your endpoint and use your models:
