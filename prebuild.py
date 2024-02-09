@@ -137,12 +137,26 @@ offset = {
     "required": False,
     "description": "The number of items to skip before starting to collect the result set.",
 }
+fields = {
+    "in": "query",
+    "name": "fields",
+    "schema": {
+        "type": "object",
+        "minimum": 0,
+        "properties": {"status": {"type": "string", "enum": ["offen", "geschlossen", "inBearbeitung"]}},
+    },
+    "style": "deepObject",
+    "explode": True,
+    "required": False,
+    "description": "The value of the fields key is a set of all fields that are requested.",
+}
 for path in api_spec["paths"]:
     for operation in api_spec["paths"][path]:
-        new_parameters = api_spec["paths"][path][operation].get("parameters", [])
-        new_parameters.append(copy.deepcopy(offset))
-        new_parameters.append(copy.deepcopy(limit))
-        api_spec["paths"][path][operation]["parameters"] = new_parameters
+        if operation == "get":
+            new_parameters = api_spec["paths"][path][operation].get("parameters", [])
+            new_parameters.append(copy.deepcopy(offset))
+            new_parameters.append(copy.deepcopy(limit))
+            api_spec["paths"][path][operation]["parameters"] = new_parameters
 
 # Spezifikation sortiren und speichern
 api_spec = sort_api_spec(api_spec)
