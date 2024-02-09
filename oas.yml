@@ -1,12 +1,9 @@
-security:
-  - BearerAuth: []  # Dies wendet das Schema global an
-
 servers:
   -
     url: 'https://api.rentman.net/'
     description: url
 info:
-  title: 'Rentman API'
+  title: 'Rentman API Documentation'
   description: "Rentman4G API is an easy to use **RESTful** inspired API.\r\n\r\n# Introduction\r\n\r\nThis API enables you to interact with Rentman programmatically. You can use this API to create automatic\r\nsynchronisations, connect other software applications, or develop any other type of integration. This page documents all\r\nthe resources available in the Rentman API. The amount of resources is limited for now but more data types will be added\r\nat a later stage. You can request more data types by getting in touch via\r\nour <a href=\"https://rentman.io/public-roadmap\">Public Roadmap</a>.\r\n\r\nTo further improve the Rentman API we would like to know what kind of integrations you are developing.  \r\nPlease share us your ideas or already developed connections at support@rentman.io\r\n\r\n## Authentication\r\n\r\nRentman uses **JWT** for authentication. This token is unique for every Rentman user. The **JWT** can be generated in\r\nthe **extensions** tab in **configuration** in the Rentman application. Only the last generated token will be a valid\r\ntoken. When regenerating a token the previous token will not work anymore.\r\n\r\n## Headers\r\n\r\nEach request to this API expects some request headers to be set.\r\n\r\n- `Content-Type` - This should always be set to `application/json`\r\n- `Authorization` - This header should be of the form `Bearer <token>`, where `token` is the JWT from the rentman\r\n  account.\r\n\r\n## Response Format\r\n\r\nEvery successful `GET` response from the Rentman Open API is a JSON object consisting of a `data` key and other\r\nmetadata. The `data` key contains an array of JSON objects representing the requested items if the request is for a\r\ncollection. The `data` key contains a JSON object representing the requested item if the request is for one item.\r\nThe `data` key responses of `POST` and `PUT` contain the created and updated items respectively. Successful `DELETE`\r\nrequests don't have responses. The keys other than the `data` key are:\r\n\r\n- `itemCount` - The amount of items in the response.\r\n- `limit` - The maximal amount of items that can be returned. This equals the limit parameter if it is set. Otherwise,\r\n  it is the response data limit.\r\n- `offset` - The amount of items skipped in the response items. This equals the offset parameter if it is set.\r\n  Otherwise, it is `0`. All the keys are always given when a response is present.\r\n\r\n## Querying\r\n\r\nThe Rentman API support several types of querying with query parameters:\r\n\r\n- `fields` - The value of the `fields` key is a set of all fields that are requested. For\r\n  example, `displayname,firstname` will only return the displayname and the firstname of every object. There are some\r\n  fields that will always be returned such as `id`, `created` and `modified`.\r\n- `sort` - The value of the `sort` key is a set of fields where the items are sorted on. For example, `+id,-firstname`\r\n  will return an array of items first sorted on id ascending and then sorted on firstname descending.\r\n\r\nIt is also possible to filter on values of fields when requesting a collection of items.\r\n> Example: To only get the contacts situated in Great Britain, a query can be added with the key `country` and the value `gb`.\r\n\r\n```\r\nGET https://api.rentman.net/contacts?country=gb\r\n```\r\n\r\n### Relational operators\r\n\r\nThe following relational operators can be used for filtering:\r\n\r\n- `lt` - less than (`<`)\r\n- `gt` - greater than (`>`)\r\n- `lte` - less than or equal to (`<=`)\r\n- `gte` - greater than or equal to (`>=`)\r\n- `neq` - not equal to (`!=`). This can also be used with multiple values, in which case it behaves like 'not in'\r\n\r\n> Example: The filter `distance[lte]=300` can be used to only retrieve items with a distance less than or equal to 300.\r\n\r\n```\r\nGET https://api.rentman.net/contacts?distance[lte]=300\r\n```\r\n\r\n### Filtering null values\r\n\r\nFiltering on null values is possible by putting `[isnull]` behind a field name, followed by a boolean value, which can\r\nbe `true`, `false`, `1` or `0`.\r\n\r\n> Example: The filter `folder[isnull]=false` can be used to only retrieve items where the value of `folder` is not null.\r\n\r\n```\r\nGET https://api.rentman.net/contacts?folder[isnull]=false\r\n```\r\n\r\n### Pagination\r\n\r\nPagination works with the `limit` and `offset` parameters.\r\n\r\n- `limit` - The value of the `limit` key is the amount of items returned. A limit of `2` will only return the first two\r\n  items.\r\n- `offset` - The value of the `offset` key is the amount of items skipped. An offset of `3` will not show the first\r\n  three items. Commonly used in combination with `limit` to paginate.\r\n\r\n> Example: To request the first 30 items of a collection in sets of 10 items three requests have to be made. All requests should have the parameter `limit=10`. The first request has in addition the parameter `offset=0` (this is the default, so it can be omitted as well), the second request has the parameter `offset=10` and the third has the parameter `offset=20`.\r\n\r\n```\r\nGET https://api.rentman.net/contacts?limit=10&offset=0\r\n```\r\n\r\n```\r\nGET https://api.rentman.net/contacts?limit=10&offset=10\r\n```\r\n\r\n```\r\nGET https://api.rentman.net/contacts?limit=10&offset=20\r\n```\r\n\r\n## Limitations\r\n\r\n### Possible sort inconsistencies\r\n\r\nEvery request sent to the Rentman API also sends a request to the Rentman backend to retrieve information. All query\r\nparameters that are given to a Rentman API request are also given the Rentman backend request, except for the sorting\r\nparameter. Due to limitations, when pagination and sorting is applied at the same time only the first field of the\r\nsorting parameter can be used before paginating in the Rentman backend. When the Rentman API retrieves the paginated\r\nitems from the Rentman backend, the items will be sorted and returned. This results in a pagination sorted only on the\r\nfirst sorting field and can cause some inconsistencies where items that are supposed to be on the page request by the\r\nsecond or third sorting parameter are on different pages since these sort parameters are not taken into account when\r\npaginating.\r\n\r\nThis issue can only exist when sorting on multiple fields and paginating at the same time.\r\n\r\n### Generated fields\r\n\r\nSome fields contain a `GENERATED FIELD` tag. All fields with this tag cannot be used for sorting while the `limit`\r\nand `offset` parameters are not empty. Generated fields are fields that the Rentman backend computes and are not stored\r\nin the database.\r\n\r\nThis is a limitation due to the way these parameters are computed in the API. Every request sent to the Rentman API also\r\nsends a request to the Rentman backend to retrieve information. The `limit` and `offset` parameters are added to this\r\nrequest to the Rentman backend. If there is a sorting parameter given to the Rentman API request, the first field of the\r\nsorting parameter is also sent with the Rentman backend request. The Rentman backend then sorts and returns a subset of\r\nthe items as defined by the query parameters of the Rentman API request. Due to limitations of the Rentman backend, the\r\nsort value that is sent to the Rentman backend cannot be one of the generated fields.\r\n\r\nThe fields containing `GENERATED FIELD` are also not queryable for filtering.\r\n\r\n## Omitted fields in list requests\r\n\r\nTo keep requests at a low cost, some fields of items are omitted when in a collection request. To get the values of\r\nthese fields, the specific item has to be requested. The fields that are returned are specified in the documentation for\r\nthe specific requests.\r\n\r\n## Custom fields\r\n\r\nCustom fields can be accessed via the `custom` key in `data`. These custom fields will have generic keys with the\r\nformat `custom_<number>`. Custom fields are not queryable.\r\n\r\n## Custom child collections\r\n\r\nThe Rentman API borrows the link structure from Rentman backend in most cases. However, some useful links (\r\ne.g. `projects` linking to `plannedequipment`) do not exist in the Rentman backend. For the Rentman API these links are\r\ncustom implemented and can be recognized by the `Get <linked_type> custom linked collection` title.\r\ne.g. `Get plannedequipment custom linked collection` for `projects`. It will never be possible to create items through\r\nthese linked collections since these links don't actually exist in the Rentman backend. It may also be possible that\r\nrelevant parent fields are missing in these custom children.\r\n\r\n## updateHash\r\n\r\nEvery item that is requested also contains a field `updateHash`. This is a field that is generated by the Rentman API\r\nand is a hash value computed with the `id` and `modified` field of the item. This hash can therefore be used to\r\nrecognize when an item is updated, since this field is unique per item and per update of that item.\r\n\r\n## Response data limitation\r\n\r\nDue to data traffic limitations responses to collection, requests are limited to 300 items per response. If a request is\r\ndone for more than 300 items, only the first 300 items are returned. If you want to request more than 300 items it is\r\nnecessary to use the `limit` and `offset` parameters to paginate your requests.\r\n\r\n## Rate limitation\r\n\r\nThe rate at which requests can be sent to the Rentman API is limited to 50.000 requests per day, and 10 requests per second. A maximum of 20 requests can be sent at once."
   version: 1.6.3
 tags:
@@ -145,7 +142,7 @@ tags:
 paths:
   /accessories:
     get:
-      operationId: Accessory_collection_get
+      operationId: Accessoire_collection_get
       summary: 'Get accessories collection.'
       description: ""
       tags:
@@ -156,10 +153,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccessoryCollectiongetResponseSchema'
+                $ref: '#/components/schemas/AccessoireCollectiongetResponseSchema'
   /appointmentcrew:
     get:
-      operationId: Appointmentcrew_collection_get
+      operationId: Afspraakmedewerker_collection_get
       summary: 'Get appointmentcrew collection.'
       description: ""
       tags:
@@ -170,10 +167,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AppointmentcrewCollectiongetResponseSchema'
+                $ref: '#/components/schemas/AfspraakmedewerkerCollectiongetResponseSchema'
   /appointments:
     post:
-      operationId: Appointment_collection_post
+      operationId: Afspraak_collection_post
       summary: 'Create appointments item.'
       description: ""
       tags:
@@ -184,15 +181,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AppointmentItempostResponseSchema'
+                $ref: '#/components/schemas/AfspraakItempostResponseSchema'
       requestBody:
         description: ""
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AppointmentItempostRequestSchema'
+              $ref: '#/components/schemas/AfspraakItempostRequestSchema'
     get:
-      operationId: Appointment_collection_get
+      operationId: Afspraak_collection_get
       summary: 'Get appointments collection.'
       description: ""
       tags:
@@ -203,10 +200,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AppointmentCollectiongetResponseSchema'
+                $ref: '#/components/schemas/AfspraakCollectiongetResponseSchema'
   /contactpersons:
     get:
-      operationId: Contactperson_collection_get
+      operationId: Person_collection_get
       summary: 'Get contactpersons collection.'
       description: ""
       tags:
@@ -217,7 +214,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContactpersonCollectiongetResponseSchema'
+                $ref: '#/components/schemas/PersonCollectiongetResponseSchema'
   /contacts:
     post:
       operationId: Contact_collection_post
@@ -281,7 +278,7 @@ paths:
                 $ref: '#/components/schemas/CostCollectiongetResponseSchema'
   /crew:
     get:
-      operationId: Crew_collection_get
+      operationId: Medewerker_collection_get
       summary: 'Get crew collection.'
       description: ""
       tags:
@@ -292,10 +289,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CrewCollectiongetResponseSchema'
+                $ref: '#/components/schemas/MedewerkerCollectiongetResponseSchema'
   /crewavailability:
     get:
-      operationId: Crewavailability_collection_get
+      operationId: Beschikbaarheid_collection_get
       summary: 'Get crewavailability collection.'
       description: ""
       tags:
@@ -306,10 +303,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CrewavailabilityCollectiongetResponseSchema'
+                $ref: '#/components/schemas/BeschikbaarheidCollectiongetResponseSchema'
   /crewrates:
     get:
-      operationId: Crewrate_collection_get
+      operationId: Medewerkertarief_collection_get
       summary: 'Get crewrates collection.'
       description: ""
       tags:
@@ -320,10 +317,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CrewrateCollectiongetResponseSchema'
+                $ref: '#/components/schemas/MedewerkertariefCollectiongetResponseSchema'
   /equipment:
     get:
-      operationId: Equipment_collection_get
+      operationId: Materiaal_collection_get
       summary: 'Get equipment collection.'
       description: ""
       tags:
@@ -334,10 +331,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EquipmentCollectiongetResponseSchema'
+                $ref: '#/components/schemas/MateriaalCollectiongetResponseSchema'
   /equipmentsetscontent:
     get:
-      operationId: Equipmentsetscontent_collection_get
+      operationId: Setinhoud_collection_get
       summary: 'Get equipmentsetscontent collection.'
       description: ""
       tags:
@@ -348,10 +345,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EquipmentsetscontentCollectiongetResponseSchema'
+                $ref: '#/components/schemas/SetinhoudCollectiongetResponseSchema'
   /files:
     get:
-      operationId: File_collection_get
+      operationId: Files_collection_get
       summary: 'Get files collection.'
       description: ""
       tags:
@@ -362,7 +359,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FilesCollectiongetResponseSchema'
   /folders:
     get:
       operationId: Folder_collection_get
@@ -379,7 +376,7 @@ paths:
                 $ref: '#/components/schemas/FolderCollectiongetResponseSchema'
   /invoicelines:
     get:
-      operationId: Invoiceline_collection_get
+      operationId: Btwbedrag_collection_get
       summary: 'Get invoicelines collection.'
       description: ""
       tags:
@@ -390,10 +387,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvoicelineCollectiongetResponseSchema'
+                $ref: '#/components/schemas/BtwbedragCollectiongetResponseSchema'
   /invoices:
     get:
-      operationId: Invoice_collection_get
+      operationId: Factuur_collection_get
       summary: 'Get invoices collection.'
       description: ""
       tags:
@@ -404,10 +401,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvoiceCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FactuurCollectiongetResponseSchema'
   /ledgercodes:
     get:
-      operationId: Ledgercode_collection_get
+      operationId: Grootboek_collection_get
       summary: 'Get ledgercodes collection.'
       description: ""
       tags:
@@ -418,7 +415,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LedgercodeCollectiongetResponseSchema'
+                $ref: '#/components/schemas/GrootboekCollectiongetResponseSchema'
   /payments:
     get:
       operationId: Payment_collection_get
@@ -435,7 +432,7 @@ paths:
                 $ref: '#/components/schemas/PaymentCollectiongetResponseSchema'
   /projectcrew:
     get:
-      operationId: Projectcrew_collection_get
+      operationId: Planningpersoneel_collection_get
       summary: 'Get projectcrew collection.'
       description: ""
       tags:
@@ -446,10 +443,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectcrewCollectiongetResponseSchema'
+                $ref: '#/components/schemas/PlanningpersoneelCollectiongetResponseSchema'
   /projectequipment:
     get:
-      operationId: Projectequipment_collection_get
+      operationId: Planningmateriaal_collection_get
       summary: 'Get projectequipment collection.'
       description: ""
       tags:
@@ -460,10 +457,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectequipmentCollectiongetResponseSchema'
+                $ref: '#/components/schemas/PlanningmateriaalCollectiongetResponseSchema'
   /projectequipmentgroup:
     get:
-      operationId: Projectequipmentgroup_collection_get
+      operationId: MateriaalCat_collection_get
       summary: 'Get projectequipmentgroup collection.'
       description: ""
       tags:
@@ -474,10 +471,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectequipmentgroupCollectiongetResponseSchema'
+                $ref: '#/components/schemas/MateriaalCatCollectiongetResponseSchema'
   /projectfunctiongroups:
     get:
-      operationId: Projectfunctiongroup_collection_get
+      operationId: Functiegroep_collection_get
       summary: 'Get projectfunctiongroups collection.'
       description: ""
       tags:
@@ -488,10 +485,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectfunctiongroupCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FunctiegroepCollectiongetResponseSchema'
   /projectfunctions:
     get:
-      operationId: Projectfunction_collection_get
+      operationId: Functie_collection_get
       summary: 'Get projectfunctions collection.'
       description: ""
       tags:
@@ -502,7 +499,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectfunctionCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FunctieCollectiongetResponseSchema'
   /projectrequestequipment:
     get:
       operationId: ProjectRequestEquipment_collection_get
@@ -566,7 +563,7 @@ paths:
                 $ref: '#/components/schemas/ProjectCollectiongetResponseSchema'
   /projecttypes:
     get:
-      operationId: Projecttype_collection_get
+      operationId: Type_collection_get
       summary: 'Get projecttypes collection.'
       description: ""
       tags:
@@ -577,10 +574,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjecttypeCollectiongetResponseSchema'
+                $ref: '#/components/schemas/TypeCollectiongetResponseSchema'
   /projectvehicles:
     get:
-      operationId: Projectvehicle_collection_get
+      operationId: Planningtransport_collection_get
       summary: 'Get projectvehicles collection.'
       description: ""
       tags:
@@ -591,10 +588,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectvehicleCollectiongetResponseSchema'
+                $ref: '#/components/schemas/PlanningtransportCollectiongetResponseSchema'
   /quotes:
     get:
-      operationId: Quote_collection_get
+      operationId: Offerte_collection_get
       summary: 'Get quotes collection.'
       description: ""
       tags:
@@ -605,7 +602,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuoteCollectiongetResponseSchema'
+                $ref: '#/components/schemas/OfferteCollectiongetResponseSchema'
   /ratefactors:
     get:
       operationId: RateFactor_collection_get
@@ -636,7 +633,7 @@ paths:
                 $ref: '#/components/schemas/RateCollectiongetResponseSchema'
   /repairs:
     get:
-      operationId: Repair_collection_get
+      operationId: Reparatie_collection_get
       summary: 'Get repairs collection.'
       description: ""
       tags:
@@ -647,10 +644,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepairCollectiongetResponseSchema'
+                $ref: '#/components/schemas/ReparatieCollectiongetResponseSchema'
   /serialnumbers:
     get:
-      operationId: Serialnumber_collection_get
+      operationId: Exemplaar_collection_get
       summary: 'Get serialnumbers collection.'
       description: ""
       tags:
@@ -661,7 +658,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SerialnumberCollectiongetResponseSchema'
+                $ref: '#/components/schemas/ExemplaarCollectiongetResponseSchema'
   /statuses:
     get:
       operationId: Status_collection_get
@@ -678,7 +675,7 @@ paths:
                 $ref: '#/components/schemas/StatusCollectiongetResponseSchema'
   /stocklocations:
     get:
-      operationId: StockLocation_collection_get
+      operationId: AssetLocation_collection_get
       summary: 'Get stocklocations collection.'
       description: ""
       tags:
@@ -689,10 +686,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StockLocationCollectiongetResponseSchema'
+                $ref: '#/components/schemas/AssetLocationCollectiongetResponseSchema'
   /stockmovements:
     get:
-      operationId: Stockmovement_collection_get
+      operationId: Voorraadmutatie_collection_get
       summary: 'Get stockmovements collection.'
       description: ""
       tags:
@@ -703,7 +700,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StockmovementCollectiongetResponseSchema'
+                $ref: '#/components/schemas/VoorraadmutatieCollectiongetResponseSchema'
   /subprojects:
     get:
       operationId: Subproject_collection_get
@@ -720,7 +717,7 @@ paths:
                 $ref: '#/components/schemas/SubprojectCollectiongetResponseSchema'
   /subrentalequipment:
     get:
-      operationId: Subrentalequipment_collection_get
+      operationId: Inhuurmateriaal_collection_get
       summary: 'Get subrentalequipment collection.'
       description: ""
       tags:
@@ -731,10 +728,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubrentalequipmentCollectiongetResponseSchema'
+                $ref: '#/components/schemas/InhuurmateriaalCollectiongetResponseSchema'
   /subrentalequipmentgroup:
     get:
-      operationId: Subrentalequipmentgroup_collection_get
+      operationId: Inhuurgroep_collection_get
       summary: 'Get subrentalequipmentgroup collection.'
       description: ""
       tags:
@@ -745,10 +742,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubrentalequipmentgroupCollectiongetResponseSchema'
+                $ref: '#/components/schemas/InhuurgroepCollectiongetResponseSchema'
   /subrentals:
     get:
-      operationId: Subrental_collection_get
+      operationId: Inhuur_collection_get
       summary: 'Get subrentals collection.'
       description: ""
       tags:
@@ -759,7 +756,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubrentalCollectiongetResponseSchema'
+                $ref: '#/components/schemas/InhuurCollectiongetResponseSchema'
   /taxclasses:
     get:
       operationId: TaxClass_collection_get
@@ -776,7 +773,7 @@ paths:
                 $ref: '#/components/schemas/TaxClassCollectiongetResponseSchema'
   /timeregistration:
     get:
-      operationId: Timeregistration_collection_get
+      operationId: Uren_collection_get
       summary: 'Get timeregistration collection.'
       description: ""
       tags:
@@ -787,10 +784,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TimeregistrationCollectiongetResponseSchema'
+                $ref: '#/components/schemas/UrenCollectiongetResponseSchema'
   /timeregistrationactivities:
     get:
-      operationId: Timeregistrationactivity_collection_get
+      operationId: Functieuur_collection_get
       summary: 'Get timeregistrationactivities collection.'
       description: ""
       tags:
@@ -801,10 +798,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TimeregistrationactivityCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FunctieuurCollectiongetResponseSchema'
   /vehicles:
     get:
-      operationId: Vehicle_collection_get
+      operationId: Voertuig_collection_get
       summary: 'Get vehicles collection.'
       description: ""
       tags:
@@ -815,10 +812,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VehicleCollectiongetResponseSchema'
+                $ref: '#/components/schemas/VoertuigCollectiongetResponseSchema'
   '/accessories/{id}':
     get:
-      operationId: Accessory_item_get
+      operationId: Accessoire_item_get
       summary: 'Get accessories item.'
       description: ""
       tags:
@@ -837,10 +834,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccessoryItemgetResponseSchema'
+                $ref: '#/components/schemas/AccessoireItemgetResponseSchema'
   '/appointmentcrew/{id}':
     get:
-      operationId: Appointmentcrew_item_get
+      operationId: Afspraakmedewerker_item_get
       summary: 'Get appointmentcrew item.'
       description: ""
       tags:
@@ -859,9 +856,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AppointmentcrewItemgetResponseSchema'
+                $ref: '#/components/schemas/AfspraakmedewerkerItemgetResponseSchema'
     put:
-      operationId: Appointmentcrew_item_put
+      operationId: Afspraakmedewerker_item_put
       summary: 'Update appointmentcrew item.'
       description: ""
       tags:
@@ -880,15 +877,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AppointmentcrewItemputResponseSchema'
+                $ref: '#/components/schemas/AfspraakmedewerkerItemputResponseSchema'
       requestBody:
         description: ""
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AppointmentcrewItemputRequestSchema'
+              $ref: '#/components/schemas/AfspraakmedewerkerItemputRequestSchema'
     delete:
-      operationId: Appointmentcrew_item_delete
+      operationId: Afspraakmedewerker_item_delete
       summary: 'Delete appointmentcrew item.'
       description: ""
       tags:
@@ -906,7 +903,7 @@ paths:
           description: 'Successful request (note that the ''data'' field can be expanded)'
   '/appointments/{id}':
     get:
-      operationId: Appointment_item_get
+      operationId: Afspraak_item_get
       summary: 'Get appointments item.'
       description: ""
       tags:
@@ -925,9 +922,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AppointmentItemgetResponseSchema'
+                $ref: '#/components/schemas/AfspraakItemgetResponseSchema'
     put:
-      operationId: Appointment_item_put
+      operationId: Afspraak_item_put
       summary: 'Update appointments item.'
       description: ""
       tags:
@@ -946,15 +943,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AppointmentItemputResponseSchema'
+                $ref: '#/components/schemas/AfspraakItemputResponseSchema'
       requestBody:
         description: ""
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AppointmentItemputRequestSchema'
+              $ref: '#/components/schemas/AfspraakItemputRequestSchema'
     delete:
-      operationId: Appointment_item_delete
+      operationId: Afspraak_item_delete
       summary: 'Delete appointments item.'
       description: ""
       tags:
@@ -972,7 +969,7 @@ paths:
           description: 'Successful request (note that the ''data'' field can be expanded)'
   '/contactpersons/{id}':
     get:
-      operationId: Contactperson_item_get
+      operationId: Person_item_get
       summary: 'Get contactpersons item.'
       description: ""
       tags:
@@ -991,9 +988,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContactpersonItemgetResponseSchema'
+                $ref: '#/components/schemas/PersonItemgetResponseSchema'
     put:
-      operationId: Contactperson_item_put
+      operationId: Person_item_put
       summary: 'Update contactpersons item.'
       description: ""
       tags:
@@ -1012,15 +1009,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContactpersonItemputResponseSchema'
+                $ref: '#/components/schemas/PersonItemputResponseSchema'
       requestBody:
         description: ""
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ContactpersonItemputRequestSchema'
+              $ref: '#/components/schemas/PersonItemputRequestSchema'
     delete:
-      operationId: Contactperson_item_delete
+      operationId: Person_item_delete
       summary: 'Delete contactpersons item.'
       description: ""
       tags:
@@ -1192,7 +1189,7 @@ paths:
           description: 'Successful request (note that the ''data'' field can be expanded)'
   '/crew/{id}':
     get:
-      operationId: Crew_item_get
+      operationId: Medewerker_item_get
       summary: 'Get crew item.'
       description: ""
       tags:
@@ -1211,10 +1208,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CrewItemgetResponseSchema'
+                $ref: '#/components/schemas/MedewerkerItemgetResponseSchema'
   '/crewavailability/{id}':
     get:
-      operationId: CrewAvailability_item_get
+      operationId: Beschikbaarheid_item_get
       summary: 'Get crewavailability item.'
       description: ""
       tags:
@@ -1233,9 +1230,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CrewAvailabilityItemgetResponseSchema'
+                $ref: '#/components/schemas/BeschikbaarheidItemgetResponseSchema'
     put:
-      operationId: CrewAvailability_item_put
+      operationId: Beschikbaarheid_item_put
       summary: 'Update crewavailability item.'
       description: ""
       tags:
@@ -1254,15 +1251,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CrewAvailabilityItemputResponseSchema'
+                $ref: '#/components/schemas/BeschikbaarheidItemputResponseSchema'
       requestBody:
         description: ""
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CrewAvailabilityItemputRequestSchema'
+              $ref: '#/components/schemas/BeschikbaarheidItemputRequestSchema'
     delete:
-      operationId: CrewAvailability_item_delete
+      operationId: Beschikbaarheid_item_delete
       summary: 'Delete crewavailability item.'
       description: ""
       tags:
@@ -1280,7 +1277,7 @@ paths:
           description: 'Successful request (note that the ''data'' field can be expanded)'
   '/crewrates/{id}':
     get:
-      operationId: Crewrate_item_get
+      operationId: Medewerkertarief_item_get
       summary: 'Get crewrates item.'
       description: ""
       tags:
@@ -1299,10 +1296,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CrewrateItemgetResponseSchema'
+                $ref: '#/components/schemas/MedewerkertariefItemgetResponseSchema'
   '/equipment/{id}':
     get:
-      operationId: Equipment_item_get
+      operationId: Materiaal_item_get
       summary: 'Get equipment item.'
       description: ""
       tags:
@@ -1321,10 +1318,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EquipmentItemgetResponseSchema'
+                $ref: '#/components/schemas/MateriaalItemgetResponseSchema'
   '/equipmentsetscontent/{id}':
     get:
-      operationId: Equipmentsetscontent_item_get
+      operationId: Setinhoud_item_get
       summary: 'Get equipmentsetscontent item.'
       description: ""
       tags:
@@ -1343,10 +1340,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EquipmentsetscontentItemgetResponseSchema'
+                $ref: '#/components/schemas/SetinhoudItemgetResponseSchema'
   '/files/{id}':
     get:
-      operationId: File_item_get
+      operationId: Files_item_get
       summary: 'Get files item.'
       description: ""
       tags:
@@ -1365,7 +1362,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileItemgetResponseSchema'
+                $ref: '#/components/schemas/FilesItemgetResponseSchema'
   '/folders/{id}':
     get:
       operationId: Folder_item_get
@@ -1390,7 +1387,7 @@ paths:
                 $ref: '#/components/schemas/FolderItemgetResponseSchema'
   '/invoicelines/{id}':
     get:
-      operationId: Invoiceline_item_get
+      operationId: Btwbedrag_item_get
       summary: 'Get invoicelines item.'
       description: ""
       tags:
@@ -1409,10 +1406,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvoicelineItemgetResponseSchema'
+                $ref: '#/components/schemas/BtwbedragItemgetResponseSchema'
   '/invoices/{id}':
     get:
-      operationId: Invoice_item_get
+      operationId: Factuur_item_get
       summary: 'Get invoices item.'
       description: ""
       tags:
@@ -1431,10 +1428,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvoiceItemgetResponseSchema'
+                $ref: '#/components/schemas/FactuurItemgetResponseSchema'
   '/ledgercodes/{id}':
     get:
-      operationId: Ledgercode_item_get
+      operationId: Grootboek_item_get
       summary: 'Get ledgercodes item.'
       description: ""
       tags:
@@ -1453,7 +1450,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LedgercodeItemgetResponseSchema'
+                $ref: '#/components/schemas/GrootboekItemgetResponseSchema'
   '/payments/{id}':
     get:
       operationId: Payment_item_get
@@ -1505,7 +1502,7 @@ paths:
               $ref: '#/components/schemas/PaymentItemputRequestSchema'
   '/projectcrew/{id}':
     get:
-      operationId: Projectcrew_item_get
+      operationId: Planningpersoneel_item_get
       summary: 'Get projectcrew item.'
       description: ""
       tags:
@@ -1524,10 +1521,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectcrewItemgetResponseSchema'
+                $ref: '#/components/schemas/PlanningpersoneelItemgetResponseSchema'
   '/projectequipment/{id}':
     get:
-      operationId: Projectequipment_item_get
+      operationId: Planningmateriaal_item_get
       summary: 'Get projectequipment item.'
       description: ""
       tags:
@@ -1546,10 +1543,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectequipmentItemgetResponseSchema'
+                $ref: '#/components/schemas/PlanningmateriaalItemgetResponseSchema'
   '/projectequipmentgroup/{id}':
     get:
-      operationId: Projectequipmentgroup_item_get
+      operationId: MateriaalCat_item_get
       summary: 'Get projectequipmentgroup item.'
       description: ""
       tags:
@@ -1568,10 +1565,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectequipmentgroupItemgetResponseSchema'
+                $ref: '#/components/schemas/MateriaalCatItemgetResponseSchema'
   '/projectfunctiongroups/{id}':
     get:
-      operationId: Projectfunctiongroup_item_get
+      operationId: Functiegroep_item_get
       summary: 'Get projectfunctiongroups item.'
       description: ""
       tags:
@@ -1590,10 +1587,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectfunctiongroupItemgetResponseSchema'
+                $ref: '#/components/schemas/FunctiegroepItemgetResponseSchema'
   '/projectfunctions/{id}':
     get:
-      operationId: Projectfunction_item_get
+      operationId: Functie_item_get
       summary: 'Get projectfunctions item.'
       description: ""
       tags:
@@ -1612,7 +1609,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectfunctionItemgetResponseSchema'
+                $ref: '#/components/schemas/FunctieItemgetResponseSchema'
   '/projectrequestequipment/{id}':
     get:
       operationId: ProjectRequestEquipment_item_get
@@ -1769,7 +1766,7 @@ paths:
                 $ref: '#/components/schemas/ProjectItemgetResponseSchema'
   '/projecttypes/{id}':
     get:
-      operationId: Projecttype_item_get
+      operationId: Type_item_get
       summary: 'Get projecttypes item.'
       description: ""
       tags:
@@ -1788,10 +1785,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjecttypeItemgetResponseSchema'
+                $ref: '#/components/schemas/TypeItemgetResponseSchema'
   '/projectvehicles/{id}':
     get:
-      operationId: Projectvehicle_item_get
+      operationId: Planningtransport_item_get
       summary: 'Get projectvehicles item.'
       description: ""
       tags:
@@ -1810,10 +1807,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectvehicleItemgetResponseSchema'
+                $ref: '#/components/schemas/PlanningtransportItemgetResponseSchema'
   '/quotes/{id}':
     get:
-      operationId: Quote_item_get
+      operationId: Offerte_item_get
       summary: 'Get quotes item.'
       description: ""
       tags:
@@ -1832,7 +1829,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuoteItemgetResponseSchema'
+                $ref: '#/components/schemas/OfferteItemgetResponseSchema'
   '/ratefactors/{id}':
     get:
       operationId: RateFactor_item_get
@@ -1879,7 +1876,7 @@ paths:
                 $ref: '#/components/schemas/RateItemgetResponseSchema'
   '/repairs/{id}':
     get:
-      operationId: Repair_item_get
+      operationId: Reparatie_item_get
       summary: 'Get repairs item.'
       description: ""
       tags:
@@ -1898,10 +1895,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepairItemgetResponseSchema'
+                $ref: '#/components/schemas/ReparatieItemgetResponseSchema'
   '/serialnumbers/{id}':
     get:
-      operationId: Serialnumber_item_get
+      operationId: Exemplaar_item_get
       summary: 'Get serialnumbers item.'
       description: ""
       tags:
@@ -1920,7 +1917,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SerialnumberItemgetResponseSchema'
+                $ref: '#/components/schemas/ExemplaarItemgetResponseSchema'
   '/statuses/{id}':
     get:
       operationId: Status_item_get
@@ -1945,7 +1942,7 @@ paths:
                 $ref: '#/components/schemas/StatusItemgetResponseSchema'
   '/stocklocations/{id}':
     get:
-      operationId: Stocklocation_item_get
+      operationId: AssetLocation_item_get
       summary: 'Get stocklocations item.'
       description: ""
       tags:
@@ -1964,10 +1961,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StocklocationItemgetResponseSchema'
+                $ref: '#/components/schemas/AssetLocationItemgetResponseSchema'
   '/stockmovements/{id}':
     get:
-      operationId: Stockmovement_item_get
+      operationId: Voorraadmutatie_item_get
       summary: 'Get stockmovements item.'
       description: ""
       tags:
@@ -1986,9 +1983,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StockmovementItemgetResponseSchema'
+                $ref: '#/components/schemas/VoorraadmutatieItemgetResponseSchema'
     put:
-      operationId: Stockmovement_item_put
+      operationId: Voorraadmutatie_item_put
       summary: 'Update stockmovements item.'
       description: ""
       tags:
@@ -2007,15 +2004,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StockmovementItemputResponseSchema'
+                $ref: '#/components/schemas/VoorraadmutatieItemputResponseSchema'
       requestBody:
         description: ""
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StockmovementItemputRequestSchema'
+              $ref: '#/components/schemas/VoorraadmutatieItemputRequestSchema'
     delete:
-      operationId: Stockmovement_item_delete
+      operationId: Voorraadmutatie_item_delete
       summary: 'Delete stockmovements item.'
       description: ""
       tags:
@@ -2055,7 +2052,7 @@ paths:
                 $ref: '#/components/schemas/SubprojectItemgetResponseSchema'
   '/subrentalequipment/{id}':
     get:
-      operationId: Subrentalequipment_item_get
+      operationId: Inhuurmateriaal_item_get
       summary: 'Get subrentalequipment item.'
       description: ""
       tags:
@@ -2074,10 +2071,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubrentalequipmentItemgetResponseSchema'
+                $ref: '#/components/schemas/InhuurmateriaalItemgetResponseSchema'
   '/subrentalequipmentgroup/{id}':
     get:
-      operationId: Subrentalequipmentgroup_item_get
+      operationId: Inhuurgroep_item_get
       summary: 'Get subrentalequipmentgroup item.'
       description: ""
       tags:
@@ -2096,10 +2093,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubrentalequipmentgroupItemgetResponseSchema'
+                $ref: '#/components/schemas/InhuurgroepItemgetResponseSchema'
   '/subrentals/{id}':
     get:
-      operationId: Subrental_item_get
+      operationId: Inhuur_item_get
       summary: 'Get subrentals item.'
       description: ""
       tags:
@@ -2118,7 +2115,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubrentalItemgetResponseSchema'
+                $ref: '#/components/schemas/InhuurItemgetResponseSchema'
   '/taxclasses/{id}':
     get:
       operationId: TaxClass_item_get
@@ -2143,7 +2140,7 @@ paths:
                 $ref: '#/components/schemas/TaxClassItemgetResponseSchema'
   '/timeregistration/{id}':
     get:
-      operationId: Timeregistration_item_get
+      operationId: Uren_item_get
       summary: 'Get timeregistration item.'
       description: ""
       tags:
@@ -2162,10 +2159,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TimeregistrationItemgetResponseSchema'
+                $ref: '#/components/schemas/UrenItemgetResponseSchema'
   '/timeregistrationactivities/{id}':
     get:
-      operationId: Timeregistrationactivity_item_get
+      operationId: Functieuur_item_get
       summary: 'Get timeregistrationactivities item.'
       description: ""
       tags:
@@ -2184,10 +2181,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TimeregistrationactivityItemgetResponseSchema'
+                $ref: '#/components/schemas/FunctieuurItemgetResponseSchema'
   '/vehicles/{id}':
     get:
-      operationId: Vehicle_item_get
+      operationId: Voertuig_item_get
       summary: 'Get vehicles item.'
       description: ""
       tags:
@@ -2206,10 +2203,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VehicleItemgetResponseSchema'
+                $ref: '#/components/schemas/VoertuigItemgetResponseSchema'
   '/appointments/{id}/appointmentcrew':
     post:
-      operationId: Appointment_item_Appointmentcrew_post
+      operationId: Afspraak_item_Afspraakmedewerker_post
       summary: 'Create appointmentcrew linked item.'
       description: ""
       tags:
@@ -2228,15 +2225,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AppointmentcrewItempostResponseSchema'
+                $ref: '#/components/schemas/AfspraakmedewerkerItempostResponseSchema'
       requestBody:
         description: ""
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AppointmentcrewItempostRequestSchema'
+              $ref: '#/components/schemas/AfspraakmedewerkerItempostRequestSchema'
     get:
-      operationId: Appointment_item_Appointmentcrew_get
+      operationId: Afspraak_item_Afspraakmedewerker_get
       summary: 'Get appointmentcrew linked collection.'
       description: ""
       tags:
@@ -2255,10 +2252,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AppointmentcrewCollectiongetResponseSchema'
+                $ref: '#/components/schemas/AfspraakmedewerkerCollectiongetResponseSchema'
   '/contactpersons/{id}/files':
     get:
-      operationId: Contactpersons_item_Files_get
+      operationId: Person_item_Files_get
       summary: 'Get files linked collection.'
       description: ""
       tags:
@@ -2277,10 +2274,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FilesCollectiongetResponseSchema'
   '/contacts/{id}/contactpersons':
     post:
-      operationId: Contact_item_Contactperson_post
+      operationId: Contact_item_Person_post
       summary: 'Create contactpersons linked item.'
       description: ""
       tags:
@@ -2299,15 +2296,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContactpersonItempostResponseSchema'
+                $ref: '#/components/schemas/PersonItempostResponseSchema'
       requestBody:
         description: ""
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ContactpersonItempostRequestSchema'
+              $ref: '#/components/schemas/PersonItempostRequestSchema'
     get:
-      operationId: Contact_item_Contactperson_get
+      operationId: Contact_item_Person_get
       summary: 'Get contactpersons linked collection.'
       description: ""
       tags:
@@ -2326,7 +2323,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContactpersonCollectiongetResponseSchema'
+                $ref: '#/components/schemas/PersonCollectiongetResponseSchema'
   '/contacts/{id}/files':
     get:
       operationId: Contact_item_Files_get
@@ -2348,7 +2345,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FilesCollectiongetResponseSchema'
   '/contracts/{id}/files':
     get:
       operationId: Contract_item_Files_get
@@ -2370,10 +2367,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FilesCollectiongetResponseSchema'
   '/contracts/{id}/invoicelines':
     get:
-      operationId: Contract_item_Invoiceline_get
+      operationId: Contract_item_Btwbedrag_get
       summary: 'Get invoicelines linked collection.'
       description: ""
       tags:
@@ -2392,10 +2389,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvoicelineCollectiongetResponseSchema'
+                $ref: '#/components/schemas/BtwbedragCollectiongetResponseSchema'
   '/crew/{id}/crewrates':
     get:
-      operationId: Crew_item_Crewrate_get
+      operationId: Medewerker_item_Medewerkertarief_get
       summary: 'Get crewrates linked collection.'
       description: ""
       tags:
@@ -2414,10 +2411,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CrewrateCollectiongetResponseSchema'
+                $ref: '#/components/schemas/MedewerkertariefCollectiongetResponseSchema'
   '/crew/{id}/crewavailability':
     post:
-      operationId: Crew_item_Crewavailability_post
+      operationId: Medewerker_item_Beschikbaarheid_post
       summary: 'Create crewavailability linked item.'
       description: ""
       tags:
@@ -2436,15 +2433,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CrewavailabilityItempostResponseSchema'
+                $ref: '#/components/schemas/BeschikbaarheidItempostResponseSchema'
       requestBody:
         description: ""
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CrewavailabilityItempostRequestSchema'
+              $ref: '#/components/schemas/BeschikbaarheidItempostRequestSchema'
     get:
-      operationId: Crew_item_Crewavailability_get
+      operationId: Medewerker_item_Beschikbaarheid_get
       summary: 'Get crewavailability linked collection.'
       description: ""
       tags:
@@ -2463,10 +2460,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CrewavailabilityCollectiongetResponseSchema'
+                $ref: '#/components/schemas/BeschikbaarheidCollectiongetResponseSchema'
   '/crew/{id}/files':
     get:
-      operationId: Crew_item_Files_get
+      operationId: Medewerker_item_Files_get
       summary: 'Get files linked collection.'
       description: ""
       tags:
@@ -2485,10 +2482,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FilesCollectiongetResponseSchema'
   '/crew/{id}/appointments':
     get:
-      operationId: Crew_item_Appointment_get
+      operationId: Medewerker_item_Afspraak_get
       summary: 'Get appointments custom linked collection.'
       description: ""
       tags:
@@ -2507,10 +2504,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AppointmentCollectiongetResponseSchema'
+                $ref: '#/components/schemas/AfspraakCollectiongetResponseSchema'
   '/equipment/{id}/files':
     get:
-      operationId: Equipment_item_Files_get
+      operationId: Materiaal_item_Files_get
       summary: 'Get files linked collection.'
       description: ""
       tags:
@@ -2529,10 +2526,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FilesCollectiongetResponseSchema'
   '/equipment/{id}/equipmentsetscontent':
     get:
-      operationId: Equipment_item_Equipmentsetscontent_get
+      operationId: Materiaal_item_Setinhoud_get
       summary: 'Get equipmentsetscontent linked collection.'
       description: ""
       tags:
@@ -2551,10 +2548,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EquipmentsetscontentCollectiongetResponseSchema'
+                $ref: '#/components/schemas/SetinhoudCollectiongetResponseSchema'
   '/equipment/{id}/repairs':
     get:
-      operationId: Equipment_item_Repair_get
+      operationId: Materiaal_item_Reparatie_get
       summary: 'Get repairs linked collection.'
       description: ""
       tags:
@@ -2573,10 +2570,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepairCollectiongetResponseSchema'
+                $ref: '#/components/schemas/ReparatieCollectiongetResponseSchema'
   '/equipment/{id}/serialnumbers':
     get:
-      operationId: Equipment_item_Serialnumber_get
+      operationId: Materiaal_item_Exemplaar_get
       summary: 'Get serialnumbers linked collection.'
       description: ""
       tags:
@@ -2595,10 +2592,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SerialnumberCollectiongetResponseSchema'
+                $ref: '#/components/schemas/ExemplaarCollectiongetResponseSchema'
   '/equipment/{id}/stockmovements':
     post:
-      operationId: Equipment_item_Stockmovement_post
+      operationId: Materiaal_item_Voorraadmutatie_post
       summary: 'Create stockmovements linked item.'
       description: ""
       tags:
@@ -2617,15 +2614,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StockmovementItempostResponseSchema'
+                $ref: '#/components/schemas/VoorraadmutatieItempostResponseSchema'
       requestBody:
         description: ""
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StockmovementItempostRequestSchema'
+              $ref: '#/components/schemas/VoorraadmutatieItempostRequestSchema'
     get:
-      operationId: Equipment_item_Stockmovement_get
+      operationId: Materiaal_item_Voorraadmutatie_get
       summary: 'Get stockmovements linked collection.'
       description: ""
       tags:
@@ -2644,10 +2641,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StockmovementCollectiongetResponseSchema'
+                $ref: '#/components/schemas/VoorraadmutatieCollectiongetResponseSchema'
   '/equipment/{id}/accessories':
     get:
-      operationId: Equipment_item_Accessory_get
+      operationId: Materiaal_item_Accessoire_get
       summary: 'Get accessories linked collection.'
       description: ""
       tags:
@@ -2666,10 +2663,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccessoryCollectiongetResponseSchema'
+                $ref: '#/components/schemas/AccessoireCollectiongetResponseSchema'
   '/invoices/{id}/invoicelines':
     get:
-      operationId: Invoice_item_Invoiceline_get
+      operationId: Factuur_item_Btwbedrag_get
       summary: 'Get invoicelines linked collection.'
       description: ""
       tags:
@@ -2688,10 +2685,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvoicelineCollectiongetResponseSchema'
+                $ref: '#/components/schemas/BtwbedragCollectiongetResponseSchema'
   '/invoices/{id}/files':
     get:
-      operationId: Invoice_item_Files_get
+      operationId: Factuur_item_Files_get
       summary: 'Get files linked collection.'
       description: ""
       tags:
@@ -2710,10 +2707,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FilesCollectiongetResponseSchema'
   '/invoices/{id}/payments':
     post:
-      operationId: Invoice_item_Payment_post
+      operationId: Factuur_item_Payment_post
       summary: 'Create payments linked item.'
       description: ""
       tags:
@@ -2740,7 +2737,7 @@ paths:
             schema:
               $ref: '#/components/schemas/PaymentItempostRequestSchema'
     get:
-      operationId: Invoice_item_Payment_get
+      operationId: Factuur_item_Payment_get
       summary: 'Get payments linked collection.'
       description: ""
       tags:
@@ -2762,7 +2759,7 @@ paths:
                 $ref: '#/components/schemas/PaymentCollectiongetResponseSchema'
   '/projectequipmentgroup/{id}/projectequipment':
     get:
-      operationId: Projectequipmentgroup_item_Projectequipment_get
+      operationId: MateriaalCat_item_Planningmateriaal_get
       summary: 'Get projectequipment linked collection.'
       description: ""
       tags:
@@ -2781,10 +2778,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectequipmentCollectiongetResponseSchema'
+                $ref: '#/components/schemas/PlanningmateriaalCollectiongetResponseSchema'
   '/projectfunctiongroups/{id}/projectfunctions':
     get:
-      operationId: Projectfunctiongroup_item_Projectfunction_get
+      operationId: Functiegroep_item_Functie_get
       summary: 'Get projectfunctions custom linked collection.'
       description: ""
       tags:
@@ -2803,10 +2800,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectfunctionCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FunctieCollectiongetResponseSchema'
   '/projectfunctions/{id}/projectcrew':
     get:
-      operationId: Projectfunction_item_Projectcrew_get
+      operationId: Functie_item_Planningpersoneel_get
       summary: 'Get projectcrew linked collection.'
       description: ""
       tags:
@@ -2825,10 +2822,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectcrewCollectiongetResponseSchema'
+                $ref: '#/components/schemas/PlanningpersoneelCollectiongetResponseSchema'
   '/projectfunctions/{id}/projectvehicles':
     get:
-      operationId: Projectfunction_item_Projectvehicle_get
+      operationId: Functie_item_Planningtransport_get
       summary: 'Get projectvehicles linked collection.'
       description: ""
       tags:
@@ -2847,7 +2844,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectvehicleCollectiongetResponseSchema'
+                $ref: '#/components/schemas/PlanningtransportCollectiongetResponseSchema'
   '/projectrequests/{id}/projectrequestequipment':
     post:
       operationId: ProjectRequest_item_ProjectRequestEquipment_post
@@ -2899,7 +2896,7 @@ paths:
                 $ref: '#/components/schemas/ProjectRequestEquipmentCollectiongetResponseSchema'
   '/projects/{id}/projectequipmentgroup':
     get:
-      operationId: Project_item_Projectequipmentgroup_get
+      operationId: Project_item_MateriaalCat_get
       summary: 'Get projectequipmentgroup linked collection.'
       description: ""
       tags:
@@ -2918,7 +2915,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectequipmentgroupCollectiongetResponseSchema'
+                $ref: '#/components/schemas/MateriaalCatCollectiongetResponseSchema'
   '/projects/{id}/contracts':
     get:
       operationId: Project_item_Contract_get
@@ -2992,7 +2989,7 @@ paths:
                 $ref: '#/components/schemas/CostCollectiongetResponseSchema'
   '/projects/{id}/projectfunctions':
     get:
-      operationId: Project_item_Projectfunction_get
+      operationId: Project_item_Functie_get
       summary: 'Get projectfunctions linked collection.'
       description: ""
       tags:
@@ -3011,7 +3008,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectfunctionCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FunctieCollectiongetResponseSchema'
   '/projects/{id}/subprojects':
     get:
       operationId: Project_item_Subproject_get
@@ -3036,7 +3033,7 @@ paths:
                 $ref: '#/components/schemas/SubprojectCollectiongetResponseSchema'
   '/projects/{id}/projectfunctiongroups':
     get:
-      operationId: Project_item_Projectfunctiongroup_get
+      operationId: Project_item_Functiegroep_get
       summary: 'Get projectfunctiongroups linked collection.'
       description: ""
       tags:
@@ -3055,10 +3052,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectfunctiongroupCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FunctiegroepCollectiongetResponseSchema'
   '/projects/{id}/quotes':
     get:
-      operationId: Project_item_Quote_get
+      operationId: Project_item_Offerte_get
       summary: 'Get quotes linked collection.'
       description: ""
       tags:
@@ -3077,7 +3074,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuoteCollectiongetResponseSchema'
+                $ref: '#/components/schemas/OfferteCollectiongetResponseSchema'
   '/projects/{id}/files':
     get:
       operationId: Project_item_Files_get
@@ -3099,10 +3096,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FilesCollectiongetResponseSchema'
   '/projects/{id}/projectvehicles':
     get:
-      operationId: Project_item_Projectvehicle_get
+      operationId: Project_item_Planningtransport_get
       summary: 'Get projectvehicles custom linked collection.'
       description: ""
       tags:
@@ -3121,10 +3118,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectvehicleCollectiongetResponseSchema'
+                $ref: '#/components/schemas/PlanningtransportCollectiongetResponseSchema'
   '/projects/{id}/projectcrew':
     get:
-      operationId: Project_item_Projectcrew_get
+      operationId: Project_item_Planningpersoneel_get
       summary: 'Get projectcrew custom linked collection.'
       description: ""
       tags:
@@ -3143,10 +3140,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectcrewCollectiongetResponseSchema'
+                $ref: '#/components/schemas/PlanningpersoneelCollectiongetResponseSchema'
   '/projects/{id}/projectequipment':
     get:
-      operationId: Project_item_Projectequipment_get
+      operationId: Project_item_Planningmateriaal_get
       summary: 'Get projectequipment custom linked collection.'
       description: ""
       tags:
@@ -3165,10 +3162,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectequipmentCollectiongetResponseSchema'
+                $ref: '#/components/schemas/PlanningmateriaalCollectiongetResponseSchema'
   '/quotes/{id}/files':
     get:
-      operationId: Quote_item_Files_get
+      operationId: Offerte_item_Files_get
       summary: 'Get files linked collection.'
       description: ""
       tags:
@@ -3187,10 +3184,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FilesCollectiongetResponseSchema'
   '/quotes/{id}/invoicelines':
     get:
-      operationId: Quote_item_Invoiceline_get
+      operationId: Offerte_item_Btwbedrag_get
       summary: 'Get invoicelines linked collection.'
       description: ""
       tags:
@@ -3209,7 +3206,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvoicelineCollectiongetResponseSchema'
+                $ref: '#/components/schemas/BtwbedragCollectiongetResponseSchema'
   '/rates/{id}/ratefactors':
     get:
       operationId: Rate_item_RateFactor_get
@@ -3234,7 +3231,7 @@ paths:
                 $ref: '#/components/schemas/RateFactorCollectiongetResponseSchema'
   '/repairs/{id}/files':
     get:
-      operationId: Repair_item_Files_get
+      operationId: Reparatie_item_Files_get
       summary: 'Get files linked collection.'
       description: ""
       tags:
@@ -3253,10 +3250,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FilesCollectiongetResponseSchema'
   '/serialnumbers/{id}/files':
     get:
-      operationId: Serialnumber_item_Files_get
+      operationId: Exemplaar_item_Files_get
       summary: 'Get files linked collection.'
       description: ""
       tags:
@@ -3275,7 +3272,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FilesCollectiongetResponseSchema'
   '/subprojects/{id}/files':
     get:
       operationId: Subproject_item_Files_get
@@ -3297,10 +3294,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FilesCollectiongetResponseSchema'
   '/subprojects/{id}/projectvehicles':
     get:
-      operationId: Subproject_item_Projectvehicle_get
+      operationId: Subproject_item_Planningtransport_get
       summary: 'Get projectvehicles custom linked collection.'
       description: ""
       tags:
@@ -3319,10 +3316,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectvehicleCollectiongetResponseSchema'
+                $ref: '#/components/schemas/PlanningtransportCollectiongetResponseSchema'
   '/subprojects/{id}/projectequipmentgroup':
     get:
-      operationId: Subproject_item_Projectequipmentgroup_get
+      operationId: Subproject_item_MateriaalCat_get
       summary: 'Get projectequipmentgroup custom linked collection.'
       description: ""
       tags:
@@ -3341,10 +3338,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectequipmentgroupCollectiongetResponseSchema'
+                $ref: '#/components/schemas/MateriaalCatCollectiongetResponseSchema'
   '/subprojects/{id}/projectcrew':
     get:
-      operationId: Subproject_item_Projectcrew_get
+      operationId: Subproject_item_Planningpersoneel_get
       summary: 'Get projectcrew custom linked collection.'
       description: ""
       tags:
@@ -3363,10 +3360,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectcrewCollectiongetResponseSchema'
+                $ref: '#/components/schemas/PlanningpersoneelCollectiongetResponseSchema'
   '/subprojects/{id}/projectequipment':
     get:
-      operationId: Subproject_item_Projectequipment_get
+      operationId: Subproject_item_Planningmateriaal_get
       summary: 'Get projectequipment custom linked collection.'
       description: ""
       tags:
@@ -3385,10 +3382,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectequipmentCollectiongetResponseSchema'
+                $ref: '#/components/schemas/PlanningmateriaalCollectiongetResponseSchema'
   '/subprojects/{id}/projectfunctiongroups':
     get:
-      operationId: Subproject_item_Projectfunctiongroup_get
+      operationId: Subproject_item_Functiegroep_get
       summary: 'Get projectfunctiongroups custom linked collection.'
       description: ""
       tags:
@@ -3407,10 +3404,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectfunctiongroupCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FunctiegroepCollectiongetResponseSchema'
   '/subrentalequipmentgroup/{id}/subrentalequipment':
     get:
-      operationId: Subrentalequipmentgroup_item_Subrentalequipment_get
+      operationId: Inhuurgroep_item_Inhuurmateriaal_get
       summary: 'Get subrentalequipment custom linked collection.'
       description: ""
       tags:
@@ -3429,10 +3426,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubrentalequipmentCollectiongetResponseSchema'
+                $ref: '#/components/schemas/InhuurmateriaalCollectiongetResponseSchema'
   '/subrentals/{id}/subrentalequipmentgroup':
     get:
-      operationId: Subrental_item_Subrentalequipmentgroup_get
+      operationId: Inhuur_item_Inhuurgroep_get
       summary: 'Get subrentalequipmentgroup custom linked collection.'
       description: ""
       tags:
@@ -3451,10 +3448,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubrentalequipmentgroupCollectiongetResponseSchema'
+                $ref: '#/components/schemas/InhuurgroepCollectiongetResponseSchema'
   '/subrentals/{id}/files':
     get:
-      operationId: Subrental_item_Files_get
+      operationId: Inhuur_item_Files_get
       summary: 'Get files linked collection.'
       description: ""
       tags:
@@ -3473,10 +3470,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FilesCollectiongetResponseSchema'
   '/subrentals/{id}/subrentalequipment':
     get:
-      operationId: Subrental_item_Subrentalequipment_get
+      operationId: Inhuur_item_Inhuurmateriaal_get
       summary: 'Get subrentalequipment custom linked collection.'
       description: ""
       tags:
@@ -3495,10 +3492,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SubrentalequipmentCollectiongetResponseSchema'
+                $ref: '#/components/schemas/InhuurmateriaalCollectiongetResponseSchema'
   '/timeregistration/{id}/files':
     get:
-      operationId: Timeregistration_item_Files_get
+      operationId: Uren_item_Files_get
       summary: 'Get files linked collection.'
       description: ""
       tags:
@@ -3517,10 +3514,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FilesCollectiongetResponseSchema'
   '/timeregistration/{id}/timeregistrationactivities':
     get:
-      operationId: Timeregistration_item_Timeregistrationactivity_get
+      operationId: Uren_item_Functieuur_get
       summary: 'Get timeregistrationactivities linked collection.'
       description: ""
       tags:
@@ -3539,10 +3536,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TimeregistrationactivityCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FunctieuurCollectiongetResponseSchema'
   '/vehicles/{id}/files':
     get:
-      operationId: Vehicle_item_Files_get
+      operationId: Voertuig_item_Files_get
       summary: 'Get files linked collection.'
       description: ""
       tags:
@@ -3561,15 +3558,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileCollectiongetResponseSchema'
+                $ref: '#/components/schemas/FilesCollectiongetResponseSchema'
 components:
-  securitySchemes:
-    BearerAuth:    # Kann ein beliebiger Name sein
-      type: http
-      scheme: bearer
-      bearerFormat: JWT  # Optional, um das Format anzugeben
   schemas:
-    AccessoryItemgetRequestSchema:
+    AccessoireItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -3596,7 +3588,7 @@ components:
         add_as_new_line:
           type: boolean
           description: 'The accessory is always added as a new line in the project as opposed to merging with the same accessory'
-    AccessoryItemgetResponseSchema:
+    AccessoireItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -3661,7 +3653,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    AccessoryCollectiongetResponseSchema:
+    AccessoireCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -3728,7 +3720,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    AccessoryItempostRequestSchema:
+    AccessoireItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -3755,7 +3747,7 @@ components:
         add_as_new_line:
           type: boolean
           description: 'The accessory is always added as a new line in the project as opposed to merging with the same accessory'
-    AccessoryItempostResponseSchema:
+    AccessoireItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -3820,7 +3812,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    AccessoryCollectionpostResponseSchema:
+    AccessoireCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -3887,7 +3879,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    AccessoryItemputRequestSchema:
+    AccessoireItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -3914,7 +3906,7 @@ components:
         add_as_new_line:
           type: boolean
           description: 'The accessory is always added as a new line in the project as opposed to merging with the same accessory'
-    AccessoryItemputResponseSchema:
+    AccessoireItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -3979,7 +3971,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    AccessoryCollectionputResponseSchema:
+    AccessoireCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -4046,7 +4038,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    AppointmentcrewItemgetRequestSchema:
+    AfspraakmedewerkerItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - crew
@@ -4056,7 +4048,7 @@ components:
           type: string
           description: ""
           example: /crew/0
-    AppointmentcrewItemgetResponseSchema:
+    AfspraakmedewerkerItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -4102,7 +4094,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    AppointmentcrewCollectiongetResponseSchema:
+    AfspraakmedewerkerCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -4150,7 +4142,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    AppointmentcrewItempostRequestSchema:
+    AfspraakmedewerkerItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - crew
@@ -4160,7 +4152,7 @@ components:
           type: string
           description: ""
           example: /crew/0
-    AppointmentcrewItempostResponseSchema:
+    AfspraakmedewerkerItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -4206,7 +4198,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    AppointmentcrewCollectionpostResponseSchema:
+    AfspraakmedewerkerCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -4254,7 +4246,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    AppointmentcrewItemputRequestSchema:
+    AfspraakmedewerkerItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - crew
@@ -4264,7 +4256,7 @@ components:
           type: string
           description: ""
           example: /crew/0
-    AppointmentcrewItemputResponseSchema:
+    AfspraakmedewerkerItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -4310,7 +4302,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    AppointmentcrewCollectionputResponseSchema:
+    AfspraakmedewerkerCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -4358,7 +4350,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    AppointmentItemgetRequestSchema:
+    AfspraakItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - start
@@ -4416,7 +4408,7 @@ components:
         synchronisation_uri:
           type: string
           description: ""
-    AppointmentItemgetResponseSchema:
+    AfspraakItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -4505,7 +4497,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    AppointmentCollectiongetResponseSchema:
+    AfspraakCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -4596,7 +4588,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    AppointmentItempostRequestSchema:
+    AfspraakItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - start
@@ -4629,7 +4621,7 @@ components:
         is_plannable:
           type: boolean
           description: 'If yes, employees can be scheduled during this appointment'
-    AppointmentItempostResponseSchema:
+    AfspraakItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -4693,7 +4685,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    AppointmentCollectionpostResponseSchema:
+    AfspraakCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -4759,7 +4751,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    AppointmentItemputRequestSchema:
+    AfspraakItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - start
@@ -4792,7 +4784,7 @@ components:
         is_plannable:
           type: boolean
           description: 'If yes, employees can be scheduled during this appointment'
-    AppointmentItemputResponseSchema:
+    AfspraakItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -4856,7 +4848,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    AppointmentCollectionputResponseSchema:
+    AfspraakCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -4922,7 +4914,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ContactpersonItemgetRequestSchema:
+    PersonItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -5162,7 +5154,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    ContactpersonItemgetResponseSchema:
+    PersonItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -5443,7 +5435,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ContactpersonCollectiongetResponseSchema:
+    PersonCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -5726,7 +5718,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ContactpersonItempostRequestSchema:
+    PersonItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -5966,7 +5958,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    ContactpersonItempostResponseSchema:
+    PersonItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -6247,7 +6239,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ContactpersonCollectionpostResponseSchema:
+    PersonCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -6530,7 +6522,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ContactpersonItemputRequestSchema:
+    PersonItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -6770,7 +6762,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    ContactpersonItemputResponseSchema:
+    PersonItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -7051,7 +7043,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ContactpersonCollectionputResponseSchema:
+    PersonCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -15641,7 +15633,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewItemgetRequestSchema:
+    MedewerkerItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -15929,7 +15921,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    CrewItemgetResponseSchema:
+    MedewerkerItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -16254,7 +16246,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewCollectiongetResponseSchema:
+    MedewerkerCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -16581,7 +16573,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewItempostRequestSchema:
+    MedewerkerItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -16869,7 +16861,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    CrewItempostResponseSchema:
+    MedewerkerItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -17194,7 +17186,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewCollectionpostResponseSchema:
+    MedewerkerCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -17521,7 +17513,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewItemputRequestSchema:
+    MedewerkerItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -17809,7 +17801,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    CrewItemputResponseSchema:
+    MedewerkerItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -18134,7 +18126,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewCollectionputResponseSchema:
+    MedewerkerCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -18461,7 +18453,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewavailabilityItemgetRequestSchema:
+    BeschikbaarheidItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -18514,7 +18506,7 @@ components:
         recurrent_group:
           type: integer
           description: ""
-    CrewAvailabilityItemgetResponseSchema:
+    BeschikbaarheidItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -18605,7 +18597,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewavailabilityCollectiongetResponseSchema:
+    BeschikbaarheidCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -18698,7 +18690,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewavailabilityItempostRequestSchema:
+    BeschikbaarheidItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -18751,7 +18743,7 @@ components:
         recurrent_group:
           type: integer
           description: ""
-    CrewavailabilityItempostResponseSchema:
+    BeschikbaarheidItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -18842,7 +18834,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewavailabilityCollectionpostResponseSchema:
+    BeschikbaarheidCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -18935,7 +18927,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewAvailabilityItemputRequestSchema:
+    BeschikbaarheidItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -18988,7 +18980,7 @@ components:
         recurrent_group:
           type: integer
           description: ""
-    CrewAvailabilityItemputResponseSchema:
+    BeschikbaarheidItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -19079,7 +19071,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewavailabilityCollectionputResponseSchema:
+    BeschikbaarheidCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -19172,7 +19164,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewrateItemgetRequestSchema:
+    MedewerkertariefItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -19184,7 +19176,7 @@ components:
           nullable: true
           description: ""
           example: /rates/0
-    CrewrateItemgetResponseSchema:
+    MedewerkertariefItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -19234,7 +19226,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewrateCollectiongetResponseSchema:
+    MedewerkertariefCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -19286,7 +19278,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewrateItempostRequestSchema:
+    MedewerkertariefItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -19298,7 +19290,7 @@ components:
           nullable: true
           description: ""
           example: /rates/0
-    CrewrateItempostResponseSchema:
+    MedewerkertariefItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -19348,7 +19340,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewrateCollectionpostResponseSchema:
+    MedewerkertariefCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -19400,7 +19392,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewrateItemputRequestSchema:
+    MedewerkertariefItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -19412,7 +19404,7 @@ components:
           nullable: true
           description: ""
           example: /rates/0
-    CrewrateItemputResponseSchema:
+    MedewerkertariefItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -19462,7 +19454,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    CrewrateCollectionputResponseSchema:
+    MedewerkertariefCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -19514,7 +19506,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    EquipmentItemgetRequestSchema:
+    MateriaalItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -19861,7 +19853,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    EquipmentItemgetResponseSchema:
+    MateriaalItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -20260,7 +20252,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    EquipmentCollectiongetResponseSchema:
+    MateriaalCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -20652,7 +20644,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    EquipmentItempostRequestSchema:
+    MateriaalItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -20999,7 +20991,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    EquipmentItempostResponseSchema:
+    MateriaalItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -21398,7 +21390,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    EquipmentCollectionpostResponseSchema:
+    MateriaalCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -21790,7 +21782,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    EquipmentItemputRequestSchema:
+    MateriaalItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -22137,7 +22129,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    EquipmentItemputResponseSchema:
+    MateriaalItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -22536,7 +22528,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    EquipmentCollectionputResponseSchema:
+    MateriaalCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -22928,7 +22920,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    EquipmentsetscontentItemgetRequestSchema:
+    SetinhoudItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - equipment
@@ -22950,7 +22942,7 @@ components:
           enum:
             - 'Available outside this combination'
             - 'Reserved from stock'
-    EquipmentsetscontentItemgetResponseSchema:
+    SetinhoudItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -23008,7 +23000,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    EquipmentsetscontentCollectiongetResponseSchema:
+    SetinhoudCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -23068,7 +23060,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    EquipmentsetscontentItempostRequestSchema:
+    SetinhoudItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - equipment
@@ -23090,7 +23082,7 @@ components:
           enum:
             - 'Available outside this combination'
             - 'Reserved from stock'
-    EquipmentsetscontentItempostResponseSchema:
+    SetinhoudItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -23148,7 +23140,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    EquipmentsetscontentCollectionpostResponseSchema:
+    SetinhoudCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -23208,7 +23200,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    EquipmentsetscontentItemputRequestSchema:
+    SetinhoudItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - equipment
@@ -23230,7 +23222,7 @@ components:
           enum:
             - 'Available outside this combination'
             - 'Reserved from stock'
-    EquipmentsetscontentItemputResponseSchema:
+    SetinhoudItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -23288,7 +23280,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    EquipmentsetscontentCollectionputResponseSchema:
+    SetinhoudCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -23348,7 +23340,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    FileItemgetRequestSchema:
+    FilesItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -23405,7 +23397,7 @@ components:
         file_itemtype:
           type: string
           description: ""
-    FileItemgetResponseSchema:
+    FilesItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -23509,7 +23501,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    FileCollectiongetResponseSchema:
+    FilesCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -23615,7 +23607,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    FileItempostRequestSchema:
+    FilesItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -23672,7 +23664,7 @@ components:
         file_itemtype:
           type: string
           description: ""
-    FileItempostResponseSchema:
+    FilesItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -23776,7 +23768,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    FileCollectionpostResponseSchema:
+    FilesCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -23882,7 +23874,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    FileItemputRequestSchema:
+    FilesItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -23939,7 +23931,7 @@ components:
         file_itemtype:
           type: string
           description: ""
-    FileItemputResponseSchema:
+    FilesItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -24043,7 +24035,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    FileCollectionputResponseSchema:
+    FilesCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -24593,7 +24585,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    InvoicelineItemgetRequestSchema:
+    BtwbedragItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -24604,7 +24596,7 @@ components:
           type: string
           description: ""
           example: /ledgercodes/0
-    InvoicelineItemgetResponseSchema:
+    BtwbedragItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -24665,7 +24657,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    InvoicelineCollectiongetResponseSchema:
+    BtwbedragCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -24728,7 +24720,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    InvoicelineItempostRequestSchema:
+    BtwbedragItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -24739,7 +24731,7 @@ components:
           type: string
           description: ""
           example: /ledgercodes/0
-    InvoicelineItempostResponseSchema:
+    BtwbedragItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -24800,7 +24792,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    InvoicelineCollectionpostResponseSchema:
+    BtwbedragCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -24863,7 +24855,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    InvoicelineItemputRequestSchema:
+    BtwbedragItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -24874,7 +24866,7 @@ components:
           type: string
           description: ""
           example: /ledgercodes/0
-    InvoicelineItemputResponseSchema:
+    BtwbedragItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -24935,7 +24927,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    InvoicelineCollectionputResponseSchema:
+    BtwbedragCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -24998,7 +24990,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    InvoiceItemgetRequestSchema:
+    FactuurItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -25045,7 +25037,7 @@ components:
         filename:
           type: string
           description: ""
-    InvoiceItemgetResponseSchema:
+    FactuurItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -25150,7 +25142,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    InvoiceCollectiongetResponseSchema:
+    FactuurCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -25236,7 +25228,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    InvoiceItempostRequestSchema:
+    FactuurItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -25283,7 +25275,7 @@ components:
         filename:
           type: string
           description: ""
-    InvoiceItempostResponseSchema:
+    FactuurItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -25388,7 +25380,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    InvoiceCollectionpostResponseSchema:
+    FactuurCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -25474,7 +25466,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    InvoiceItemputRequestSchema:
+    FactuurItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -25521,7 +25513,7 @@ components:
         filename:
           type: string
           description: ""
-    InvoiceItemputResponseSchema:
+    FactuurItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -25626,7 +25618,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    InvoiceCollectionputResponseSchema:
+    FactuurCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -25712,14 +25704,14 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    LedgercodeItemgetRequestSchema:
+    GrootboekItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
         code:
           type: string
           description: ""
-    LedgercodeItemgetResponseSchema:
+    GrootboekItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -25760,7 +25752,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    LedgercodeCollectiongetResponseSchema:
+    GrootboekCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -25803,14 +25795,14 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    LedgercodeItempostRequestSchema:
+    GrootboekItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
         code:
           type: string
           description: ""
-    LedgercodeItempostResponseSchema:
+    GrootboekItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -25851,7 +25843,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    LedgercodeCollectionpostResponseSchema:
+    GrootboekCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -25894,14 +25886,14 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    LedgercodeItemputRequestSchema:
+    GrootboekItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
         code:
           type: string
           description: ""
-    LedgercodeItemputResponseSchema:
+    GrootboekItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -25942,7 +25934,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    LedgercodeCollectionputResponseSchema:
+    GrootboekCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -26432,7 +26424,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectcrewItemgetRequestSchema:
+    PlanningpersoneelItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - crewmember
@@ -26489,7 +26481,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    ProjectcrewItemgetResponseSchema:
+    PlanningpersoneelItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -26599,7 +26591,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectcrewCollectiongetResponseSchema:
+    PlanningpersoneelCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -26711,7 +26703,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectcrewItempostRequestSchema:
+    PlanningpersoneelItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - crewmember
@@ -26768,7 +26760,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    ProjectcrewItempostResponseSchema:
+    PlanningpersoneelItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -26878,7 +26870,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectcrewCollectionpostResponseSchema:
+    PlanningpersoneelCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -26990,7 +26982,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectcrewItemputRequestSchema:
+    PlanningpersoneelItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - crewmember
@@ -27047,7 +27039,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    ProjectcrewItemputResponseSchema:
+    PlanningpersoneelItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -27157,7 +27149,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectcrewCollectionputResponseSchema:
+    PlanningpersoneelCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -27269,7 +27261,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectequipmentItemgetRequestSchema:
+    PlanningmateriaalItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -27327,7 +27319,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    ProjectequipmentItemgetResponseSchema:
+    PlanningmateriaalItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -27445,7 +27437,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectequipmentCollectiongetResponseSchema:
+    PlanningmateriaalCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -27565,7 +27557,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectequipmentItempostRequestSchema:
+    PlanningmateriaalItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -27623,7 +27615,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    ProjectequipmentItempostResponseSchema:
+    PlanningmateriaalItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -27741,7 +27733,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectequipmentCollectionpostResponseSchema:
+    PlanningmateriaalCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -27861,7 +27853,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectequipmentItemputRequestSchema:
+    PlanningmateriaalItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -27919,7 +27911,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    ProjectequipmentItemputResponseSchema:
+    PlanningmateriaalItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -28037,7 +28029,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectequipmentCollectionputResponseSchema:
+    PlanningmateriaalCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -28157,7 +28149,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectequipmentgroupItemgetRequestSchema:
+    MateriaalCatItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - subproject
@@ -28209,7 +28201,7 @@ components:
         remark:
           type: string
           description: ""
-    ProjectequipmentgroupItemgetResponseSchema:
+    MateriaalCatItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -28312,7 +28304,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectequipmentgroupCollectiongetResponseSchema:
+    MateriaalCatCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -28417,7 +28409,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectequipmentgroupItempostRequestSchema:
+    MateriaalCatItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - subproject
@@ -28469,7 +28461,7 @@ components:
         remark:
           type: string
           description: ""
-    ProjectequipmentgroupItempostResponseSchema:
+    MateriaalCatItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -28572,7 +28564,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectequipmentgroupCollectionpostResponseSchema:
+    MateriaalCatCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -28677,7 +28669,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectequipmentgroupItemputRequestSchema:
+    MateriaalCatItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - subproject
@@ -28729,7 +28721,7 @@ components:
         remark:
           type: string
           description: ""
-    ProjectequipmentgroupItemputResponseSchema:
+    MateriaalCatItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -28832,7 +28824,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectequipmentgroupCollectionputResponseSchema:
+    MateriaalCatCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -28937,7 +28929,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectfunctiongroupItemgetRequestSchema:
+    FunctiegroepItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - subproject
@@ -29001,7 +28993,7 @@ components:
         remark:
           type: string
           description: ""
-    ProjectfunctiongroupItemgetResponseSchema:
+    FunctiegroepItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -29101,7 +29093,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectfunctiongroupCollectiongetResponseSchema:
+    FunctiegroepCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -29203,7 +29195,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectfunctionItemgetRequestSchema:
+    FunctieItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - cost_rate
@@ -29351,7 +29343,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    ProjectfunctionItemgetResponseSchema:
+    FunctieItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -29554,7 +29546,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectfunctionCollectiongetResponseSchema:
+    FunctieCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -31992,7 +31984,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjecttypeItemgetRequestSchema:
+    TypeItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -32010,7 +32002,7 @@ components:
             - supplier
             - transfer
             - shifts
-    ProjecttypeItemgetResponseSchema:
+    TypeItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -32062,7 +32054,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjecttypeCollectiongetResponseSchema:
+    TypeCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -32116,7 +32108,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjecttypeItempostRequestSchema:
+    TypeItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -32134,7 +32126,7 @@ components:
             - supplier
             - transfer
             - shifts
-    ProjecttypeItempostResponseSchema:
+    TypeItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -32186,7 +32178,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjecttypeCollectionpostResponseSchema:
+    TypeCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -32240,7 +32232,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjecttypeItemputRequestSchema:
+    TypeItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -32258,7 +32250,7 @@ components:
             - supplier
             - transfer
             - shifts
-    ProjecttypeItemputResponseSchema:
+    TypeItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -32310,7 +32302,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjecttypeCollectionputResponseSchema:
+    TypeCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -32364,7 +32356,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectvehicleItemgetRequestSchema:
+    PlanningtransportItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - vehicle
@@ -32409,7 +32401,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    ProjectvehicleItemgetResponseSchema:
+    PlanningtransportItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -32493,7 +32485,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectvehicleCollectiongetResponseSchema:
+    PlanningtransportCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -32579,7 +32571,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectvehicleItempostRequestSchema:
+    PlanningtransportItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - vehicle
@@ -32624,7 +32616,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    ProjectvehicleItempostResponseSchema:
+    PlanningtransportItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -32708,7 +32700,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectvehicleCollectionpostResponseSchema:
+    PlanningtransportCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -32794,7 +32786,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectvehicleItemputRequestSchema:
+    PlanningtransportItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       required:
         - vehicle
@@ -32839,7 +32831,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    ProjectvehicleItemputResponseSchema:
+    PlanningtransportItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -32923,7 +32915,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    ProjectvehicleCollectionputResponseSchema:
+    PlanningtransportCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -33009,7 +33001,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    QuoteItemgetRequestSchema:
+    OfferteItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -33046,7 +33038,7 @@ components:
         filename:
           type: string
           description: ""
-    QuoteItemgetResponseSchema:
+    OfferteItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -33151,7 +33143,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    QuoteCollectiongetResponseSchema:
+    OfferteCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -33237,7 +33229,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    QuoteItempostRequestSchema:
+    OfferteItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -33274,7 +33266,7 @@ components:
         filename:
           type: string
           description: ""
-    QuoteItempostResponseSchema:
+    OfferteItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -33379,7 +33371,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    QuoteCollectionpostResponseSchema:
+    OfferteCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -33465,7 +33457,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    QuoteItemputRequestSchema:
+    OfferteItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -33502,7 +33494,7 @@ components:
         filename:
           type: string
           description: ""
-    QuoteItemputResponseSchema:
+    OfferteItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -33607,7 +33599,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    QuoteCollectionputResponseSchema:
+    OfferteCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -34228,7 +34220,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    RepairItemgetRequestSchema:
+    ReparatieItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -34301,7 +34293,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    RepairItemgetResponseSchema:
+    ReparatieItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -34415,7 +34407,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    RepairCollectiongetResponseSchema:
+    ReparatieCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -34531,7 +34523,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    RepairItempostRequestSchema:
+    ReparatieItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -34604,7 +34596,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    RepairItempostResponseSchema:
+    ReparatieItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -34718,7 +34710,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    RepairCollectionpostResponseSchema:
+    ReparatieCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -34834,7 +34826,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    RepairItemputRequestSchema:
+    ReparatieItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -34907,7 +34899,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    RepairItemputResponseSchema:
+    ReparatieItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -35021,7 +35013,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    RepairCollectionputResponseSchema:
+    ReparatieCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -35137,7 +35129,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SerialnumberItemgetRequestSchema:
+    ExemplaarItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -35177,7 +35169,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    SerialnumberItemgetResponseSchema:
+    ExemplaarItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -35268,7 +35260,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SerialnumberCollectiongetResponseSchema:
+    ExemplaarCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -35361,7 +35353,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SerialnumberItempostRequestSchema:
+    ExemplaarItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -35401,7 +35393,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    SerialnumberItempostResponseSchema:
+    ExemplaarItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -35492,7 +35484,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SerialnumberCollectionpostResponseSchema:
+    ExemplaarCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -35585,7 +35577,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SerialnumberItemputRequestSchema:
+    ExemplaarItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -35625,7 +35617,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    SerialnumberItemputResponseSchema:
+    ExemplaarItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -35716,7 +35708,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SerialnumberCollectionputResponseSchema:
+    ExemplaarCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -36082,7 +36074,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    StocklocationItemgetRequestSchema:
+    AssetLocationItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -36312,7 +36304,7 @@ components:
         in_archive:
           type: boolean
           description: 'This stock location is archived. This means that it cannot be used in equipment planning.'
-    StocklocationItemgetResponseSchema:
+    AssetLocationItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -36576,7 +36568,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    StockLocationCollectiongetResponseSchema:
+    AssetLocationCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -36842,7 +36834,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    StocklocationItempostRequestSchema:
+    AssetLocationItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -37072,7 +37064,7 @@ components:
         in_archive:
           type: boolean
           description: 'This stock location is archived. This means that it cannot be used in equipment planning.'
-    StocklocationItempostResponseSchema:
+    AssetLocationItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -37336,7 +37328,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    StocklocationCollectionpostResponseSchema:
+    AssetLocationCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -37602,7 +37594,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    StocklocationItemputRequestSchema:
+    AssetLocationItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -37832,7 +37824,7 @@ components:
         in_archive:
           type: boolean
           description: 'This stock location is archived. This means that it cannot be used in equipment planning.'
-    StocklocationItemputResponseSchema:
+    AssetLocationItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -38096,7 +38088,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    StocklocationCollectionputResponseSchema:
+    AssetLocationCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -38362,7 +38354,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    StockmovementItemgetRequestSchema:
+    VoorraadmutatieItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -38409,7 +38401,7 @@ components:
           nullable: true
           description: ""
           example: /stocklocations/0
-    StockmovementItemgetResponseSchema:
+    VoorraadmutatieItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -38494,7 +38486,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    StockmovementCollectiongetResponseSchema:
+    VoorraadmutatieCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -38581,7 +38573,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    StockmovementItempostRequestSchema:
+    VoorraadmutatieItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -38609,7 +38601,7 @@ components:
           nullable: true
           description: ""
           example: /stocklocations/0
-    StockmovementItempostResponseSchema:
+    VoorraadmutatieItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -38675,7 +38667,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    StockmovementCollectionpostResponseSchema:
+    VoorraadmutatieCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -38743,7 +38735,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    StockmovementItemputRequestSchema:
+    VoorraadmutatieItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -38771,7 +38763,7 @@ components:
           nullable: true
           description: ""
           example: /stocklocations/0
-    StockmovementItemputResponseSchema:
+    VoorraadmutatieItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -38837,7 +38829,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    StockmovementCollectionputResponseSchema:
+    VoorraadmutatieCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -39302,7 +39294,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalequipmentItemgetRequestSchema:
+    InhuurmateriaalItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -39358,7 +39350,7 @@ components:
           nullable: true
           description: ""
           example: /projectequipment/0
-    SubrentalequipmentItemgetResponseSchema:
+    InhuurmateriaalItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -39452,7 +39444,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalequipmentCollectiongetResponseSchema:
+    InhuurmateriaalCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -39548,7 +39540,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalequipmentItempostRequestSchema:
+    InhuurmateriaalItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -39604,7 +39596,7 @@ components:
           nullable: true
           description: ""
           example: /projectequipment/0
-    SubrentalequipmentItempostResponseSchema:
+    InhuurmateriaalItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -39698,7 +39690,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalequipmentCollectionpostResponseSchema:
+    InhuurmateriaalCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -39794,7 +39786,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalequipmentItemputRequestSchema:
+    InhuurmateriaalItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -39850,7 +39842,7 @@ components:
           nullable: true
           description: ""
           example: /projectequipment/0
-    SubrentalequipmentItemputResponseSchema:
+    InhuurmateriaalItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -39944,7 +39936,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalequipmentCollectionputResponseSchema:
+    InhuurmateriaalCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -40040,7 +40032,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalequipmentgroupItemgetRequestSchema:
+    InhuurgroepItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -40055,7 +40047,7 @@ components:
           nullable: true
           description: ""
           example: /projectequipmentgroup/0
-    SubrentalequipmentgroupItemgetResponseSchema:
+    InhuurgroepItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -40108,7 +40100,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalequipmentgroupCollectiongetResponseSchema:
+    InhuurgroepCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -40163,7 +40155,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalequipmentgroupItempostRequestSchema:
+    InhuurgroepItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -40178,7 +40170,7 @@ components:
           nullable: true
           description: ""
           example: /projectequipmentgroup/0
-    SubrentalequipmentgroupItempostResponseSchema:
+    InhuurgroepItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -40231,7 +40223,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalequipmentgroupCollectionpostResponseSchema:
+    InhuurgroepCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -40286,7 +40278,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalequipmentgroupItemputRequestSchema:
+    InhuurgroepItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -40301,7 +40293,7 @@ components:
           nullable: true
           description: ""
           example: /projectequipmentgroup/0
-    SubrentalequipmentgroupItemputResponseSchema:
+    InhuurgroepItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -40354,7 +40346,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalequipmentgroupCollectionputResponseSchema:
+    InhuurgroepCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -40409,7 +40401,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalItemgetRequestSchema:
+    InhuurItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -40532,7 +40524,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    SubrentalItemgetResponseSchema:
+    InhuurItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -40692,7 +40684,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalCollectiongetResponseSchema:
+    InhuurCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -40854,7 +40846,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalItempostRequestSchema:
+    InhuurItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -40977,7 +40969,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    SubrentalItempostResponseSchema:
+    InhuurItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -41137,7 +41129,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalCollectionpostResponseSchema:
+    InhuurCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -41299,7 +41291,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalItemputRequestSchema:
+    InhuurItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -41422,7 +41414,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    SubrentalItemputResponseSchema:
+    InhuurItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -41582,7 +41574,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    SubrentalCollectionputResponseSchema:
+    InhuurCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -42107,7 +42099,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    TimeregistrationItemgetRequestSchema:
+    UrenItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -42165,7 +42157,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    TimeregistrationItemgetResponseSchema:
+    UrenItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -42257,7 +42249,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    TimeregistrationCollectiongetResponseSchema:
+    UrenCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -42351,7 +42343,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    TimeregistrationItempostRequestSchema:
+    UrenItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -42409,7 +42401,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    TimeregistrationItempostResponseSchema:
+    UrenItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -42501,7 +42493,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    TimeregistrationCollectionpostResponseSchema:
+    UrenCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -42595,7 +42587,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    TimeregistrationItemputRequestSchema:
+    UrenItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -42653,7 +42645,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    TimeregistrationItemputResponseSchema:
+    UrenItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -42745,7 +42737,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    TimeregistrationCollectionputResponseSchema:
+    UrenCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -42839,7 +42831,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    TimeregistrationactivityItemgetRequestSchema:
+    FunctieuurItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -42855,7 +42847,7 @@ components:
           type: number
           nullable: true
           description: ""
-    TimeregistrationactivityItemgetResponseSchema:
+    FunctieuurItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -42909,7 +42901,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    TimeregistrationactivityCollectiongetResponseSchema:
+    FunctieuurCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -42965,7 +42957,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    TimeregistrationactivityItempostRequestSchema:
+    FunctieuurItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -42981,7 +42973,7 @@ components:
           type: number
           nullable: true
           description: ""
-    TimeregistrationactivityItempostResponseSchema:
+    FunctieuurItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -43035,7 +43027,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    TimeregistrationactivityCollectionpostResponseSchema:
+    FunctieuurCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -43091,7 +43083,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    TimeregistrationactivityItemputRequestSchema:
+    FunctieuurItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -43107,7 +43099,7 @@ components:
           type: number
           nullable: true
           description: ""
-    TimeregistrationactivityItemputResponseSchema:
+    FunctieuurItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -43161,7 +43153,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    TimeregistrationactivityCollectionputResponseSchema:
+    FunctieuurCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -43217,7 +43209,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    VehicleItemgetRequestSchema:
+    VoertuigItemgetRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -43282,7 +43274,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    VehicleItemgetResponseSchema:
+    VoertuigItemgetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -43390,7 +43382,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    VehicleCollectiongetResponseSchema:
+    VoertuigCollectiongetResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -43500,7 +43492,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    VehicleItempostRequestSchema:
+    VoertuigItempostRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -43565,7 +43557,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    VehicleItempostResponseSchema:
+    VoertuigItempostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -43673,7 +43665,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    VehicleCollectionpostResponseSchema:
+    VoertuigCollectionpostResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -43783,7 +43775,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    VehicleItemputRequestSchema:
+    VoertuigItemputRequestSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -43848,7 +43840,7 @@ components:
           example:
             custom_1: string
             custom_2: 2
-    VehicleItemputResponseSchema:
+    VoertuigItemputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
@@ -43956,7 +43948,7 @@ components:
         offset:
           type: number
           description: 'The amount of items skipped in data'
-    VehicleCollectionputResponseSchema:
+    VoertuigCollectionputResponseSchema:
       $schema: 'http://json-schema.org/draft-04/schema#'
       type: object
       properties:
