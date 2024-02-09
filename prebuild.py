@@ -1,3 +1,5 @@
+import copy
+
 import yaml
 
 
@@ -112,6 +114,35 @@ for old_word, new_word in word_pairs:
     api_spec["paths"] = replace_in_api_spec(
         api_spec=api_spec["paths"], old_word=old_word, new_word=new_word, key="$ref"
     )
+limit = {
+    "in": "query",
+    "name": "limit",
+    "schema": {
+        "type": "integer",
+        "minimum": 0,
+        "default": 300,
+        "maximum": 300,
+    },
+    "required": False,
+    "description": "The number of items to return.",
+}
+offset = {
+    "in": "query",
+    "name": "offset",
+    "schema": {
+        "type": "integer",
+        "minimum": 0,
+        "default": 0,
+    },
+    "required": False,
+    "description": "The number of items to skip before starting to collect the result set.",
+}
+for path in api_spec["paths"]:
+    for operation in api_spec["paths"][path]:
+        new_parameters = api_spec["paths"][path][operation].get("parameters", [])
+        new_parameters.append(copy.deepcopy(offset))
+        new_parameters.append(copy.deepcopy(limit))
+        api_spec["paths"][path][operation]["parameters"] = new_parameters
 
 # Spezifikation sortiren und speichern
 api_spec = sort_api_spec(api_spec)

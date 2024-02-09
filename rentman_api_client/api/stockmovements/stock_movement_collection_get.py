@@ -1,26 +1,35 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 import httpx
 
 from ...client import Client
 from ...models.stock_movement_collectionget_response_schema import StockMovementCollectiongetResponseSchema
-from ...types import Response
+from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     *,
     client: Client,
+    offset: Union[Unset, int] = 0,
+    limit: Union[Unset, int] = 300,
 ) -> Dict[str, Any]:
     url = "{}/stockmovements".format(client.base_url)
 
     headers: Dict[str, Any] = client.get_headers()
     cookies: Dict[str, Any] = client.get_cookies()
 
+    params: Dict[str, Any] = {
+        "offset": offset,
+        "limit": limit,
+    }
+    params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
     return {
         "url": url,
         "headers": headers,
         "cookies": cookies,
         "timeout": client.get_timeout(),
+        "params": params,
     }
 
 
@@ -44,9 +53,13 @@ def _build_response(*, response: httpx.Response) -> Response[StockMovementCollec
 def sync_detailed(
     *,
     client: Client,
+    offset: Union[Unset, int] = 0,
+    limit: Union[Unset, int] = 300,
 ) -> Response[StockMovementCollectiongetResponseSchema]:
     kwargs = _get_kwargs(
         client=client,
+        offset=offset,
+        limit=limit,
     )
 
     response = httpx.get(
@@ -59,20 +72,28 @@ def sync_detailed(
 def sync(
     *,
     client: Client,
+    offset: Union[Unset, int] = 0,
+    limit: Union[Unset, int] = 300,
 ) -> Optional[StockMovementCollectiongetResponseSchema]:
     """ """
 
     return sync_detailed(
         client=client,
+        offset=offset,
+        limit=limit,
     ).parsed
 
 
 async def asyncio_detailed(
     *,
     client: Client,
+    offset: Union[Unset, int] = 0,
+    limit: Union[Unset, int] = 300,
 ) -> Response[StockMovementCollectiongetResponseSchema]:
     kwargs = _get_kwargs(
         client=client,
+        offset=offset,
+        limit=limit,
     )
 
     async with httpx.AsyncClient() as _client:
@@ -84,11 +105,15 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Client,
+    offset: Union[Unset, int] = 0,
+    limit: Union[Unset, int] = 300,
 ) -> Optional[StockMovementCollectiongetResponseSchema]:
     """ """
 
     return (
         await asyncio_detailed(
             client=client,
+            offset=offset,
+            limit=limit,
         )
     ).parsed

@@ -40927,6 +40927,25 @@ paths:
     get:
       description: ''
       operationId: Accessory_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -40948,6 +40967,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -40962,6 +40999,25 @@ paths:
     get:
       description: ''
       operationId: AppointmentCrew_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -40983,6 +41039,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -40999,6 +41073,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41019,6 +41111,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41039,6 +41149,25 @@ paths:
     get:
       description: ''
       operationId: Appointment_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41052,6 +41181,25 @@ paths:
     post:
       description: ''
       operationId: Appointment_collection_post
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41079,6 +41227,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -41095,6 +41261,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41115,6 +41299,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41142,6 +41344,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41162,6 +41382,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41182,6 +41420,25 @@ paths:
     get:
       description: ''
       operationId: Contactperson_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41203,6 +41460,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -41219,6 +41494,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41239,6 +41532,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41266,6 +41577,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41280,6 +41609,25 @@ paths:
     get:
       description: ''
       operationId: Contact_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41293,6 +41641,25 @@ paths:
     post:
       description: ''
       operationId: Contact_collection_post
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41320,6 +41687,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -41336,6 +41721,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41356,6 +41759,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41383,6 +41804,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41403,6 +41842,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41430,6 +41887,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41444,6 +41919,25 @@ paths:
     get:
       description: ''
       operationId: Contract_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41465,6 +41959,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41486,6 +41998,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41507,6 +42037,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41521,6 +42069,25 @@ paths:
     get:
       description: ''
       operationId: Cost_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41542,6 +42109,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -41558,6 +42143,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41578,6 +42181,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41598,6 +42219,25 @@ paths:
     get:
       description: ''
       operationId: Crew_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41619,6 +42259,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41640,6 +42298,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41661,6 +42337,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41681,6 +42375,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41708,6 +42420,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41729,6 +42459,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41743,6 +42491,25 @@ paths:
     get:
       description: ''
       operationId: CrewAvailability_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41764,6 +42531,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -41780,6 +42565,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41800,6 +42603,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41820,6 +42641,25 @@ paths:
     get:
       description: ''
       operationId: CrewRates_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41841,6 +42681,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41855,6 +42713,25 @@ paths:
     get:
       description: ''
       operationId: Equipment_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41876,6 +42753,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41897,6 +42792,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41918,6 +42831,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41939,6 +42870,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41960,6 +42909,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -41981,6 +42948,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42002,6 +42987,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42022,6 +43025,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -42042,6 +43063,25 @@ paths:
     get:
       description: ''
       operationId: EquipmentSetsContent_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42063,6 +43103,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42077,6 +43135,25 @@ paths:
     get:
       description: ''
       operationId: File_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42098,6 +43175,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42112,6 +43207,25 @@ paths:
     get:
       description: ''
       operationId: Folder_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42133,6 +43247,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42147,6 +43279,25 @@ paths:
     get:
       description: ''
       operationId: InvoiceLines_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42168,6 +43319,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42182,6 +43351,25 @@ paths:
     get:
       description: ''
       operationId: Invoice_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42203,6 +43391,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42224,6 +43430,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42245,6 +43469,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42266,6 +43508,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42286,6 +43546,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -42306,6 +43584,25 @@ paths:
     get:
       description: ''
       operationId: LedgerCode_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42327,6 +43624,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42341,6 +43656,25 @@ paths:
     get:
       description: ''
       operationId: Payment_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42362,6 +43696,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42382,6 +43734,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -42402,6 +43772,25 @@ paths:
     get:
       description: ''
       operationId: ProjectCrew_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42423,6 +43812,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42437,6 +43844,25 @@ paths:
     get:
       description: ''
       operationId: ProjectEquipment_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42458,6 +43884,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42472,6 +43916,25 @@ paths:
     get:
       description: ''
       operationId: ProjectEquipmentGroup_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42493,6 +43956,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42514,6 +43995,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42528,6 +44027,25 @@ paths:
     get:
       description: ''
       operationId: ProjectFunctionGroup_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42549,6 +44067,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42570,6 +44106,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42584,6 +44138,25 @@ paths:
     get:
       description: ''
       operationId: ProjectFunction_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42605,6 +44178,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42626,6 +44217,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42647,6 +44256,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42661,6 +44288,25 @@ paths:
     get:
       description: ''
       operationId: ProjectRequestEquipment_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42682,6 +44328,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -42698,6 +44362,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42718,6 +44400,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -42738,6 +44438,25 @@ paths:
     get:
       description: ''
       operationId: ProjectRequest_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42751,6 +44470,25 @@ paths:
     post:
       description: ''
       operationId: ProjectRequest_collection_post
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -42778,6 +44516,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -42794,6 +44550,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42814,6 +44588,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -42841,6 +44633,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42861,6 +44671,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -42881,6 +44709,25 @@ paths:
     get:
       description: ''
       operationId: Project_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42902,6 +44749,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42923,6 +44788,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42944,6 +44827,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -42964,6 +44865,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -42991,6 +44910,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43012,6 +44949,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43033,6 +44988,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43054,6 +45027,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43075,6 +45066,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43096,6 +45105,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43117,6 +45144,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43138,6 +45183,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43159,6 +45222,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43173,6 +45254,25 @@ paths:
     get:
       description: ''
       operationId: ProjectType_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43194,6 +45294,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43208,6 +45326,25 @@ paths:
     get:
       description: ''
       operationId: ProjectVehicles_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43229,6 +45366,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43243,6 +45398,25 @@ paths:
     get:
       description: ''
       operationId: Quote_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43264,6 +45438,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43285,6 +45477,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43306,6 +45516,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43320,6 +45548,25 @@ paths:
     get:
       description: ''
       operationId: RateFactor_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43341,6 +45588,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43355,6 +45620,25 @@ paths:
     get:
       description: ''
       operationId: Rate_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43376,6 +45660,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43397,6 +45699,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43411,6 +45731,25 @@ paths:
     get:
       description: ''
       operationId: Repair_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43432,6 +45771,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43453,6 +45810,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43467,6 +45842,25 @@ paths:
     get:
       description: ''
       operationId: SerialNumber_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43488,6 +45882,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43509,6 +45921,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43523,6 +45953,25 @@ paths:
     get:
       description: ''
       operationId: Status_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43544,6 +45993,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43558,6 +46025,25 @@ paths:
     get:
       description: ''
       operationId: StockLocation_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43579,6 +46065,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43593,6 +46097,25 @@ paths:
     get:
       description: ''
       operationId: StockMovement_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43614,6 +46137,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -43630,6 +46171,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43650,6 +46209,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -43670,6 +46247,25 @@ paths:
     get:
       description: ''
       operationId: Subproject_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43691,6 +46287,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43712,6 +46326,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43733,6 +46365,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43754,6 +46404,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43775,6 +46443,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43796,6 +46482,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43817,6 +46521,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43831,6 +46553,25 @@ paths:
     get:
       description: ''
       operationId: SubrentalEquipment_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43852,6 +46593,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43866,6 +46625,25 @@ paths:
     get:
       description: ''
       operationId: SubrentalEquipmentGroup_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43887,6 +46665,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43908,6 +46704,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43922,6 +46736,25 @@ paths:
     get:
       description: ''
       operationId: Subrental_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43943,6 +46776,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43964,6 +46815,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -43985,6 +46854,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -44006,6 +46893,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -44020,6 +46925,25 @@ paths:
     get:
       description: ''
       operationId: TaxClass_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -44041,6 +46965,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -44055,6 +46997,25 @@ paths:
     get:
       description: ''
       operationId: TimeRegistration_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -44076,6 +47037,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -44097,6 +47076,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -44118,6 +47115,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -44132,6 +47147,25 @@ paths:
     get:
       description: ''
       operationId: TimeRegistrationActivity_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -44153,6 +47187,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -44167,6 +47219,25 @@ paths:
     get:
       description: ''
       operationId: Vehicle_collection_get
+      parameters:
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -44188,6 +47259,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
@@ -44209,6 +47298,24 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+        required: false
+        description: The number of items to skip before starting to collect the result
+          set.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 0
+          default: 300
+          maximum: 300
+        required: false
+        description: The number of items to return.
       responses:
         '200':
           content:
