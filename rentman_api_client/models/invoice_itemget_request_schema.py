@@ -11,97 +11,97 @@ T = TypeVar("T", bound="InvoiceItemgetRequestSchema")
 class InvoiceItemgetRequestSchema:
     """ """
 
-    customer: Union[Unset, None, str] = UNSET
     account_manager: Union[Unset, None, str] = UNSET
     contact: Union[Unset, None, str] = UNSET
-    expiration: Union[Unset, None, str] = UNSET
+    customer: Union[Unset, None, str] = UNSET
     date: Union[Unset, None, str] = UNSET
+    expiration: Union[Unset, None, str] = UNSET
+    filename: Union[Unset, str] = UNSET
+    from_project: Union[Unset, bool] = UNSET
     number: Union[Unset, str] = UNSET
     procent: Union[Unset, float] = UNSET
-    from_project: Union[Unset, bool] = UNSET
-    subject: Union[Unset, str] = UNSET
     project: Union[Unset, None, str] = UNSET
-    filename: Union[Unset, str] = UNSET
+    subject: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        customer = self.customer
         account_manager = self.account_manager
         contact = self.contact
-        expiration = self.expiration
+        customer = self.customer
         date = self.date
+        expiration = self.expiration
+        filename = self.filename
+        from_project = self.from_project
         number = self.number
         procent = self.procent
-        from_project = self.from_project
-        subject = self.subject
         project = self.project
-        filename = self.filename
+        subject = self.subject
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if customer is not UNSET:
-            field_dict["customer"] = customer
         if account_manager is not UNSET:
             field_dict["account_manager"] = account_manager
         if contact is not UNSET:
             field_dict["contact"] = contact
-        if expiration is not UNSET:
-            field_dict["expiration"] = expiration
+        if customer is not UNSET:
+            field_dict["customer"] = customer
         if date is not UNSET:
             field_dict["date"] = date
+        if expiration is not UNSET:
+            field_dict["expiration"] = expiration
+        if filename is not UNSET:
+            field_dict["filename"] = filename
+        if from_project is not UNSET:
+            field_dict["from_project"] = from_project
         if number is not UNSET:
             field_dict["number"] = number
         if procent is not UNSET:
             field_dict["procent"] = procent
-        if from_project is not UNSET:
-            field_dict["from_project"] = from_project
-        if subject is not UNSET:
-            field_dict["subject"] = subject
         if project is not UNSET:
             field_dict["project"] = project
-        if filename is not UNSET:
-            field_dict["filename"] = filename
+        if subject is not UNSET:
+            field_dict["subject"] = subject
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        customer = d.pop("customer", UNSET)
-
         account_manager = d.pop("account_manager", UNSET)
 
         contact = d.pop("contact", UNSET)
 
-        expiration = d.pop("expiration", UNSET)
+        customer = d.pop("customer", UNSET)
 
         date = d.pop("date", UNSET)
+
+        expiration = d.pop("expiration", UNSET)
+
+        filename = d.pop("filename", UNSET)
+
+        from_project = d.pop("from_project", UNSET)
 
         number = d.pop("number", UNSET)
 
         procent = d.pop("procent", UNSET)
 
-        from_project = d.pop("from_project", UNSET)
+        project = d.pop("project", UNSET)
 
         subject = d.pop("subject", UNSET)
 
-        project = d.pop("project", UNSET)
-
-        filename = d.pop("filename", UNSET)
-
         invoice_itemget_request_schema = cls(
-            customer=customer,
             account_manager=account_manager,
             contact=contact,
-            expiration=expiration,
+            customer=customer,
             date=date,
+            expiration=expiration,
+            filename=filename,
+            from_project=from_project,
             number=number,
             procent=procent,
-            from_project=from_project,
-            subject=subject,
             project=project,
-            filename=filename,
+            subject=subject,
         )
 
         invoice_itemget_request_schema.additional_properties = d

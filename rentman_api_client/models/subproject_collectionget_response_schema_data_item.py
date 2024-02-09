@@ -16,90 +16,66 @@ T = TypeVar("T", bound="SubprojectCollectiongetResponseSchemaDataItem")
 class SubprojectCollectiongetResponseSchemaDataItem:
     """ """
 
-    id: Union[Unset, int] = UNSET
+    already_invoiced: Union[Unset, float] = UNSET
+    asset_location_from: Union[Unset, None, str] = UNSET
     created: Union[Unset, None, datetime.datetime] = UNSET
-    modified: Union[Unset, None, datetime.datetime] = UNSET
     creator: Union[Unset, None, str] = UNSET
-    displayname: Union[Unset, str] = UNSET
-    project: Union[Unset, str] = UNSET
-    order: Union[Unset, str] = UNSET
-    name: Union[Unset, str] = UNSET
-    status: Union[Unset, str] = UNSET
-    is_template: Union[Unset, bool] = UNSET
-    location: Union[Unset, None, str] = UNSET
-    loc_contact: Union[Unset, None, str] = UNSET
-    insurance_rate: Union[Unset, float] = UNSET
-    discount_rental: Union[Unset, float] = UNSET
-    discount_sale: Union[Unset, float] = UNSET
-    discount_crew: Union[Unset, float] = UNSET
-    discount_transport: Union[Unset, float] = UNSET
+    current: Union[Unset, float] = UNSET
+    custom: Union[Unset, SubprojectCollectiongetResponseSchemaDataItemCustom] = UNSET
     discount_additional_costs: Union[Unset, float] = UNSET
-    discount_subproject: Union[Unset, float] = UNSET
+    discount_crew: Union[Unset, float] = UNSET
     discount_fixed: Union[Unset, bool] = UNSET
     discount_fixed_amount: Union[Unset, float] = UNSET
-    fixed_price: Union[Unset, bool] = UNSET
-    in_planning: Union[Unset, bool] = UNSET
-    in_financial: Union[Unset, bool] = UNSET
-    asset_location_from: Union[Unset, None, str] = UNSET
-    already_invoiced: Union[Unset, float] = UNSET
-    planperiod_start: Union[Unset, None, datetime.datetime] = UNSET
-    planperiod_end: Union[Unset, None, datetime.datetime] = UNSET
-    volume: Union[Unset, float] = UNSET
-    weight: Union[Unset, float] = UNSET
-    power: Union[Unset, float] = UNSET
-    current: Union[Unset, float] = UNSET
-    purchasecosts: Union[Unset, float] = UNSET
+    discount_rental: Union[Unset, float] = UNSET
+    discount_sale: Union[Unset, float] = UNSET
+    discount_subproject: Union[Unset, float] = UNSET
+    discount_transport: Union[Unset, float] = UNSET
+    displayname: Union[Unset, str] = UNSET
     equipment_period_from: Union[Unset, None, datetime.datetime] = UNSET
     equipment_period_to: Union[Unset, None, datetime.datetime] = UNSET
-    custom: Union[Unset, SubprojectCollectiongetResponseSchemaDataItemCustom] = UNSET
+    fixed_price: Union[Unset, bool] = UNSET
+    id: Union[Unset, int] = UNSET
+    in_financial: Union[Unset, bool] = UNSET
+    in_planning: Union[Unset, bool] = UNSET
+    insurance_rate: Union[Unset, float] = UNSET
+    is_template: Union[Unset, bool] = UNSET
+    loc_contact: Union[Unset, None, str] = UNSET
+    location: Union[Unset, None, str] = UNSET
+    modified: Union[Unset, None, datetime.datetime] = UNSET
+    name: Union[Unset, str] = UNSET
+    order: Union[Unset, str] = UNSET
+    planperiod_end: Union[Unset, None, datetime.datetime] = UNSET
+    planperiod_start: Union[Unset, None, datetime.datetime] = UNSET
+    power: Union[Unset, float] = UNSET
+    project: Union[Unset, str] = UNSET
+    purchasecosts: Union[Unset, float] = UNSET
+    status: Union[Unset, str] = UNSET
+    volume: Union[Unset, float] = UNSET
+    weight: Union[Unset, float] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        id = self.id
+        already_invoiced = self.already_invoiced
+        asset_location_from = self.asset_location_from
         created: Union[Unset, None, str] = UNSET
         if not isinstance(self.created, Unset):
             created = self.created.isoformat() if self.created else None
 
-        modified: Union[Unset, None, str] = UNSET
-        if not isinstance(self.modified, Unset):
-            modified = self.modified.isoformat() if self.modified else None
-
         creator = self.creator
-        displayname = self.displayname
-        project = self.project
-        order = self.order
-        name = self.name
-        status = self.status
-        is_template = self.is_template
-        location = self.location
-        loc_contact = self.loc_contact
-        insurance_rate = self.insurance_rate
-        discount_rental = self.discount_rental
-        discount_sale = self.discount_sale
-        discount_crew = self.discount_crew
-        discount_transport = self.discount_transport
+        current = self.current
+        custom: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.custom, Unset):
+            custom = self.custom.to_dict()
+
         discount_additional_costs = self.discount_additional_costs
-        discount_subproject = self.discount_subproject
+        discount_crew = self.discount_crew
         discount_fixed = self.discount_fixed
         discount_fixed_amount = self.discount_fixed_amount
-        fixed_price = self.fixed_price
-        in_planning = self.in_planning
-        in_financial = self.in_financial
-        asset_location_from = self.asset_location_from
-        already_invoiced = self.already_invoiced
-        planperiod_start: Union[Unset, None, str] = UNSET
-        if not isinstance(self.planperiod_start, Unset):
-            planperiod_start = self.planperiod_start.isoformat() if self.planperiod_start else None
-
-        planperiod_end: Union[Unset, None, str] = UNSET
-        if not isinstance(self.planperiod_end, Unset):
-            planperiod_end = self.planperiod_end.isoformat() if self.planperiod_end else None
-
-        volume = self.volume
-        weight = self.weight
-        power = self.power
-        current = self.current
-        purchasecosts = self.purchasecosts
+        discount_rental = self.discount_rental
+        discount_sale = self.discount_sale
+        discount_subproject = self.discount_subproject
+        discount_transport = self.discount_transport
+        displayname = self.displayname
         equipment_period_from: Union[Unset, None, str] = UNSET
         if not isinstance(self.equipment_period_from, Unset):
             equipment_period_from = self.equipment_period_from.isoformat() if self.equipment_period_from else None
@@ -108,168 +84,151 @@ class SubprojectCollectiongetResponseSchemaDataItem:
         if not isinstance(self.equipment_period_to, Unset):
             equipment_period_to = self.equipment_period_to.isoformat() if self.equipment_period_to else None
 
-        custom: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.custom, Unset):
-            custom = self.custom.to_dict()
+        fixed_price = self.fixed_price
+        id = self.id
+        in_financial = self.in_financial
+        in_planning = self.in_planning
+        insurance_rate = self.insurance_rate
+        is_template = self.is_template
+        loc_contact = self.loc_contact
+        location = self.location
+        modified: Union[Unset, None, str] = UNSET
+        if not isinstance(self.modified, Unset):
+            modified = self.modified.isoformat() if self.modified else None
+
+        name = self.name
+        order = self.order
+        planperiod_end: Union[Unset, None, str] = UNSET
+        if not isinstance(self.planperiod_end, Unset):
+            planperiod_end = self.planperiod_end.isoformat() if self.planperiod_end else None
+
+        planperiod_start: Union[Unset, None, str] = UNSET
+        if not isinstance(self.planperiod_start, Unset):
+            planperiod_start = self.planperiod_start.isoformat() if self.planperiod_start else None
+
+        power = self.power
+        project = self.project
+        purchasecosts = self.purchasecosts
+        status = self.status
+        volume = self.volume
+        weight = self.weight
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if id is not UNSET:
-            field_dict["id"] = id
+        if already_invoiced is not UNSET:
+            field_dict["already_invoiced"] = already_invoiced
+        if asset_location_from is not UNSET:
+            field_dict["asset_location_from"] = asset_location_from
         if created is not UNSET:
             field_dict["created"] = created
-        if modified is not UNSET:
-            field_dict["modified"] = modified
         if creator is not UNSET:
             field_dict["creator"] = creator
-        if displayname is not UNSET:
-            field_dict["displayname"] = displayname
-        if project is not UNSET:
-            field_dict["project"] = project
-        if order is not UNSET:
-            field_dict["order"] = order
-        if name is not UNSET:
-            field_dict["name"] = name
-        if status is not UNSET:
-            field_dict["status"] = status
-        if is_template is not UNSET:
-            field_dict["is_template"] = is_template
-        if location is not UNSET:
-            field_dict["location"] = location
-        if loc_contact is not UNSET:
-            field_dict["loc_contact"] = loc_contact
-        if insurance_rate is not UNSET:
-            field_dict["insurance_rate"] = insurance_rate
-        if discount_rental is not UNSET:
-            field_dict["discount_rental"] = discount_rental
-        if discount_sale is not UNSET:
-            field_dict["discount_sale"] = discount_sale
-        if discount_crew is not UNSET:
-            field_dict["discount_crew"] = discount_crew
-        if discount_transport is not UNSET:
-            field_dict["discount_transport"] = discount_transport
+        if current is not UNSET:
+            field_dict["current"] = current
+        if custom is not UNSET:
+            field_dict["custom"] = custom
         if discount_additional_costs is not UNSET:
             field_dict["discount_additional_costs"] = discount_additional_costs
-        if discount_subproject is not UNSET:
-            field_dict["discount_subproject"] = discount_subproject
+        if discount_crew is not UNSET:
+            field_dict["discount_crew"] = discount_crew
         if discount_fixed is not UNSET:
             field_dict["discount_fixed"] = discount_fixed
         if discount_fixed_amount is not UNSET:
             field_dict["discount_fixed_amount"] = discount_fixed_amount
-        if fixed_price is not UNSET:
-            field_dict["fixed_price"] = fixed_price
-        if in_planning is not UNSET:
-            field_dict["in_planning"] = in_planning
-        if in_financial is not UNSET:
-            field_dict["in_financial"] = in_financial
-        if asset_location_from is not UNSET:
-            field_dict["asset_location_from"] = asset_location_from
-        if already_invoiced is not UNSET:
-            field_dict["already_invoiced"] = already_invoiced
-        if planperiod_start is not UNSET:
-            field_dict["planperiod_start"] = planperiod_start
-        if planperiod_end is not UNSET:
-            field_dict["planperiod_end"] = planperiod_end
-        if volume is not UNSET:
-            field_dict["volume"] = volume
-        if weight is not UNSET:
-            field_dict["weight"] = weight
-        if power is not UNSET:
-            field_dict["power"] = power
-        if current is not UNSET:
-            field_dict["current"] = current
-        if purchasecosts is not UNSET:
-            field_dict["purchasecosts"] = purchasecosts
+        if discount_rental is not UNSET:
+            field_dict["discount_rental"] = discount_rental
+        if discount_sale is not UNSET:
+            field_dict["discount_sale"] = discount_sale
+        if discount_subproject is not UNSET:
+            field_dict["discount_subproject"] = discount_subproject
+        if discount_transport is not UNSET:
+            field_dict["discount_transport"] = discount_transport
+        if displayname is not UNSET:
+            field_dict["displayname"] = displayname
         if equipment_period_from is not UNSET:
             field_dict["equipment_period_from"] = equipment_period_from
         if equipment_period_to is not UNSET:
             field_dict["equipment_period_to"] = equipment_period_to
-        if custom is not UNSET:
-            field_dict["custom"] = custom
+        if fixed_price is not UNSET:
+            field_dict["fixed_price"] = fixed_price
+        if id is not UNSET:
+            field_dict["id"] = id
+        if in_financial is not UNSET:
+            field_dict["in_financial"] = in_financial
+        if in_planning is not UNSET:
+            field_dict["in_planning"] = in_planning
+        if insurance_rate is not UNSET:
+            field_dict["insurance_rate"] = insurance_rate
+        if is_template is not UNSET:
+            field_dict["is_template"] = is_template
+        if loc_contact is not UNSET:
+            field_dict["loc_contact"] = loc_contact
+        if location is not UNSET:
+            field_dict["location"] = location
+        if modified is not UNSET:
+            field_dict["modified"] = modified
+        if name is not UNSET:
+            field_dict["name"] = name
+        if order is not UNSET:
+            field_dict["order"] = order
+        if planperiod_end is not UNSET:
+            field_dict["planperiod_end"] = planperiod_end
+        if planperiod_start is not UNSET:
+            field_dict["planperiod_start"] = planperiod_start
+        if power is not UNSET:
+            field_dict["power"] = power
+        if project is not UNSET:
+            field_dict["project"] = project
+        if purchasecosts is not UNSET:
+            field_dict["purchasecosts"] = purchasecosts
+        if status is not UNSET:
+            field_dict["status"] = status
+        if volume is not UNSET:
+            field_dict["volume"] = volume
+        if weight is not UNSET:
+            field_dict["weight"] = weight
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        id = d.pop("id", UNSET)
+        already_invoiced = d.pop("already_invoiced", UNSET)
+
+        asset_location_from = d.pop("asset_location_from", UNSET)
 
         created = None
         _created = d.pop("created", UNSET)
         if _created is not None and not isinstance(_created, Unset):
             created = isoparse(_created)
 
-        modified = None
-        _modified = d.pop("modified", UNSET)
-        if _modified is not None and not isinstance(_modified, Unset):
-            modified = isoparse(_modified)
-
         creator = d.pop("creator", UNSET)
 
-        displayname = d.pop("displayname", UNSET)
+        current = d.pop("current", UNSET)
 
-        project = d.pop("project", UNSET)
-
-        order = d.pop("order", UNSET)
-
-        name = d.pop("name", UNSET)
-
-        status = d.pop("status", UNSET)
-
-        is_template = d.pop("is_template", UNSET)
-
-        location = d.pop("location", UNSET)
-
-        loc_contact = d.pop("loc_contact", UNSET)
-
-        insurance_rate = d.pop("insurance_rate", UNSET)
-
-        discount_rental = d.pop("discount_rental", UNSET)
-
-        discount_sale = d.pop("discount_sale", UNSET)
-
-        discount_crew = d.pop("discount_crew", UNSET)
-
-        discount_transport = d.pop("discount_transport", UNSET)
+        custom: Union[Unset, SubprojectCollectiongetResponseSchemaDataItemCustom] = UNSET
+        _custom = d.pop("custom", UNSET)
+        if not isinstance(_custom, Unset):
+            custom = SubprojectCollectiongetResponseSchemaDataItemCustom.from_dict(_custom)
 
         discount_additional_costs = d.pop("discount_additional_costs", UNSET)
 
-        discount_subproject = d.pop("discount_subproject", UNSET)
+        discount_crew = d.pop("discount_crew", UNSET)
 
         discount_fixed = d.pop("discount_fixed", UNSET)
 
         discount_fixed_amount = d.pop("discount_fixed_amount", UNSET)
 
-        fixed_price = d.pop("fixed_price", UNSET)
+        discount_rental = d.pop("discount_rental", UNSET)
 
-        in_planning = d.pop("in_planning", UNSET)
+        discount_sale = d.pop("discount_sale", UNSET)
 
-        in_financial = d.pop("in_financial", UNSET)
+        discount_subproject = d.pop("discount_subproject", UNSET)
 
-        asset_location_from = d.pop("asset_location_from", UNSET)
+        discount_transport = d.pop("discount_transport", UNSET)
 
-        already_invoiced = d.pop("already_invoiced", UNSET)
-
-        planperiod_start = None
-        _planperiod_start = d.pop("planperiod_start", UNSET)
-        if _planperiod_start is not None and not isinstance(_planperiod_start, Unset):
-            planperiod_start = isoparse(_planperiod_start)
-
-        planperiod_end = None
-        _planperiod_end = d.pop("planperiod_end", UNSET)
-        if _planperiod_end is not None and not isinstance(_planperiod_end, Unset):
-            planperiod_end = isoparse(_planperiod_end)
-
-        volume = d.pop("volume", UNSET)
-
-        weight = d.pop("weight", UNSET)
-
-        power = d.pop("power", UNSET)
-
-        current = d.pop("current", UNSET)
-
-        purchasecosts = d.pop("purchasecosts", UNSET)
+        displayname = d.pop("displayname", UNSET)
 
         equipment_period_from = None
         _equipment_period_from = d.pop("equipment_period_from", UNSET)
@@ -281,48 +240,90 @@ class SubprojectCollectiongetResponseSchemaDataItem:
         if _equipment_period_to is not None and not isinstance(_equipment_period_to, Unset):
             equipment_period_to = isoparse(_equipment_period_to)
 
-        custom: Union[Unset, SubprojectCollectiongetResponseSchemaDataItemCustom] = UNSET
-        _custom = d.pop("custom", UNSET)
-        if not isinstance(_custom, Unset):
-            custom = SubprojectCollectiongetResponseSchemaDataItemCustom.from_dict(_custom)
+        fixed_price = d.pop("fixed_price", UNSET)
+
+        id = d.pop("id", UNSET)
+
+        in_financial = d.pop("in_financial", UNSET)
+
+        in_planning = d.pop("in_planning", UNSET)
+
+        insurance_rate = d.pop("insurance_rate", UNSET)
+
+        is_template = d.pop("is_template", UNSET)
+
+        loc_contact = d.pop("loc_contact", UNSET)
+
+        location = d.pop("location", UNSET)
+
+        modified = None
+        _modified = d.pop("modified", UNSET)
+        if _modified is not None and not isinstance(_modified, Unset):
+            modified = isoparse(_modified)
+
+        name = d.pop("name", UNSET)
+
+        order = d.pop("order", UNSET)
+
+        planperiod_end = None
+        _planperiod_end = d.pop("planperiod_end", UNSET)
+        if _planperiod_end is not None and not isinstance(_planperiod_end, Unset):
+            planperiod_end = isoparse(_planperiod_end)
+
+        planperiod_start = None
+        _planperiod_start = d.pop("planperiod_start", UNSET)
+        if _planperiod_start is not None and not isinstance(_planperiod_start, Unset):
+            planperiod_start = isoparse(_planperiod_start)
+
+        power = d.pop("power", UNSET)
+
+        project = d.pop("project", UNSET)
+
+        purchasecosts = d.pop("purchasecosts", UNSET)
+
+        status = d.pop("status", UNSET)
+
+        volume = d.pop("volume", UNSET)
+
+        weight = d.pop("weight", UNSET)
 
         subproject_collectionget_response_schema_data_item = cls(
-            id=id,
+            already_invoiced=already_invoiced,
+            asset_location_from=asset_location_from,
             created=created,
-            modified=modified,
             creator=creator,
-            displayname=displayname,
-            project=project,
-            order=order,
-            name=name,
-            status=status,
-            is_template=is_template,
-            location=location,
-            loc_contact=loc_contact,
-            insurance_rate=insurance_rate,
-            discount_rental=discount_rental,
-            discount_sale=discount_sale,
-            discount_crew=discount_crew,
-            discount_transport=discount_transport,
+            current=current,
+            custom=custom,
             discount_additional_costs=discount_additional_costs,
-            discount_subproject=discount_subproject,
+            discount_crew=discount_crew,
             discount_fixed=discount_fixed,
             discount_fixed_amount=discount_fixed_amount,
-            fixed_price=fixed_price,
-            in_planning=in_planning,
-            in_financial=in_financial,
-            asset_location_from=asset_location_from,
-            already_invoiced=already_invoiced,
-            planperiod_start=planperiod_start,
-            planperiod_end=planperiod_end,
-            volume=volume,
-            weight=weight,
-            power=power,
-            current=current,
-            purchasecosts=purchasecosts,
+            discount_rental=discount_rental,
+            discount_sale=discount_sale,
+            discount_subproject=discount_subproject,
+            discount_transport=discount_transport,
+            displayname=displayname,
             equipment_period_from=equipment_period_from,
             equipment_period_to=equipment_period_to,
-            custom=custom,
+            fixed_price=fixed_price,
+            id=id,
+            in_financial=in_financial,
+            in_planning=in_planning,
+            insurance_rate=insurance_rate,
+            is_template=is_template,
+            loc_contact=loc_contact,
+            location=location,
+            modified=modified,
+            name=name,
+            order=order,
+            planperiod_end=planperiod_end,
+            planperiod_start=planperiod_start,
+            power=power,
+            project=project,
+            purchasecosts=purchasecosts,
+            status=status,
+            volume=volume,
+            weight=weight,
         )
 
         subproject_collectionget_response_schema_data_item.additional_properties = d

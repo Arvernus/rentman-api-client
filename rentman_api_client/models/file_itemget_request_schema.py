@@ -12,103 +12,99 @@ T = TypeVar("T", bound="FileItemgetRequestSchema")
 class FileItemgetRequestSchema:
     """ """
 
-    readable_name: Union[Unset, str] = UNSET
-    expiration: Union[Unset, None, str] = UNSET
-    size: Union[Unset, int] = UNSET
-    image: Union[Unset, bool] = UNSET
-    itemtype: Union[Unset, None, int] = UNSET
-    description: Union[Unset, str] = UNSET
-    in_documents: Union[Unset, bool] = UNSET
-    in_webshop: Union[Unset, bool] = UNSET
     classified: Union[Unset, bool] = UNSET
-    public: Union[Unset, bool] = UNSET
-    type: Union[Unset, str] = UNSET
-    preview_of: Union[Unset, None, str] = UNSET
-    previewstatus: Union[Unset, FileItemgetRequestSchemaPreviewstatus] = UNSET
+    description: Union[Unset, str] = UNSET
+    expiration: Union[Unset, None, str] = UNSET
     file_item: Union[Unset, int] = UNSET
     file_itemtype: Union[Unset, str] = UNSET
+    image: Union[Unset, bool] = UNSET
+    in_documents: Union[Unset, bool] = UNSET
+    in_webshop: Union[Unset, bool] = UNSET
+    itemtype: Union[Unset, None, int] = UNSET
+    preview_of: Union[Unset, None, str] = UNSET
+    previewstatus: Union[Unset, FileItemgetRequestSchemaPreviewstatus] = UNSET
+    public: Union[Unset, bool] = UNSET
+    readable_name: Union[Unset, str] = UNSET
+    size: Union[Unset, int] = UNSET
+    type: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        readable_name = self.readable_name
-        expiration = self.expiration
-        size = self.size
-        image = self.image
-        itemtype = self.itemtype
+        classified = self.classified
         description = self.description
+        expiration = self.expiration
+        file_item = self.file_item
+        file_itemtype = self.file_itemtype
+        image = self.image
         in_documents = self.in_documents
         in_webshop = self.in_webshop
-        classified = self.classified
-        public = self.public
-        type = self.type
+        itemtype = self.itemtype
         preview_of = self.preview_of
         previewstatus: Union[Unset, bool] = UNSET
         if not isinstance(self.previewstatus, Unset):
             previewstatus = self.previewstatus.value
 
-        file_item = self.file_item
-        file_itemtype = self.file_itemtype
+        public = self.public
+        readable_name = self.readable_name
+        size = self.size
+        type = self.type
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if readable_name is not UNSET:
-            field_dict["readable_name"] = readable_name
-        if expiration is not UNSET:
-            field_dict["expiration"] = expiration
-        if size is not UNSET:
-            field_dict["size"] = size
-        if image is not UNSET:
-            field_dict["image"] = image
-        if itemtype is not UNSET:
-            field_dict["itemtype"] = itemtype
-        if description is not UNSET:
-            field_dict["description"] = description
-        if in_documents is not UNSET:
-            field_dict["in_documents"] = in_documents
-        if in_webshop is not UNSET:
-            field_dict["in_webshop"] = in_webshop
         if classified is not UNSET:
             field_dict["classified"] = classified
-        if public is not UNSET:
-            field_dict["public"] = public
-        if type is not UNSET:
-            field_dict["type"] = type
-        if preview_of is not UNSET:
-            field_dict["preview_of"] = preview_of
-        if previewstatus is not UNSET:
-            field_dict["previewstatus"] = previewstatus
+        if description is not UNSET:
+            field_dict["description"] = description
+        if expiration is not UNSET:
+            field_dict["expiration"] = expiration
         if file_item is not UNSET:
             field_dict["file_item"] = file_item
         if file_itemtype is not UNSET:
             field_dict["file_itemtype"] = file_itemtype
+        if image is not UNSET:
+            field_dict["image"] = image
+        if in_documents is not UNSET:
+            field_dict["in_documents"] = in_documents
+        if in_webshop is not UNSET:
+            field_dict["in_webshop"] = in_webshop
+        if itemtype is not UNSET:
+            field_dict["itemtype"] = itemtype
+        if preview_of is not UNSET:
+            field_dict["preview_of"] = preview_of
+        if previewstatus is not UNSET:
+            field_dict["previewstatus"] = previewstatus
+        if public is not UNSET:
+            field_dict["public"] = public
+        if readable_name is not UNSET:
+            field_dict["readable_name"] = readable_name
+        if size is not UNSET:
+            field_dict["size"] = size
+        if type is not UNSET:
+            field_dict["type"] = type
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        readable_name = d.pop("readable_name", UNSET)
+        classified = d.pop("classified", UNSET)
+
+        description = d.pop("description", UNSET)
 
         expiration = d.pop("expiration", UNSET)
 
-        size = d.pop("size", UNSET)
+        file_item = d.pop("file_item", UNSET)
+
+        file_itemtype = d.pop("file_itemtype", UNSET)
 
         image = d.pop("image", UNSET)
-
-        itemtype = d.pop("itemtype", UNSET)
-
-        description = d.pop("description", UNSET)
 
         in_documents = d.pop("in_documents", UNSET)
 
         in_webshop = d.pop("in_webshop", UNSET)
 
-        classified = d.pop("classified", UNSET)
-
-        public = d.pop("public", UNSET)
-
-        type = d.pop("type", UNSET)
+        itemtype = d.pop("itemtype", UNSET)
 
         preview_of = d.pop("preview_of", UNSET)
 
@@ -117,26 +113,30 @@ class FileItemgetRequestSchema:
         if not isinstance(_previewstatus, Unset):
             previewstatus = FileItemgetRequestSchemaPreviewstatus(_previewstatus)
 
-        file_item = d.pop("file_item", UNSET)
+        public = d.pop("public", UNSET)
 
-        file_itemtype = d.pop("file_itemtype", UNSET)
+        readable_name = d.pop("readable_name", UNSET)
+
+        size = d.pop("size", UNSET)
+
+        type = d.pop("type", UNSET)
 
         file_itemget_request_schema = cls(
-            readable_name=readable_name,
-            expiration=expiration,
-            size=size,
-            image=image,
-            itemtype=itemtype,
-            description=description,
-            in_documents=in_documents,
-            in_webshop=in_webshop,
             classified=classified,
-            public=public,
-            type=type,
-            preview_of=preview_of,
-            previewstatus=previewstatus,
+            description=description,
+            expiration=expiration,
             file_item=file_item,
             file_itemtype=file_itemtype,
+            image=image,
+            in_documents=in_documents,
+            in_webshop=in_webshop,
+            itemtype=itemtype,
+            preview_of=preview_of,
+            previewstatus=previewstatus,
+            public=public,
+            readable_name=readable_name,
+            size=size,
+            type=type,
         )
 
         file_itemget_request_schema.additional_properties = d

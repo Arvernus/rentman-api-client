@@ -11,48 +11,48 @@ T = TypeVar("T", bound="RateFactorItemputRequestSchema")
 class RateFactorItemputRequestSchema:
     """ """
 
+    fixed: Union[Unset, float] = UNSET
     from_: Union[Unset, None, float] = UNSET
     to: Union[Unset, None, float] = UNSET
     variable: Union[Unset, float] = UNSET
-    fixed: Union[Unset, float] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
+        fixed = self.fixed
         from_ = self.from_
         to = self.to
         variable = self.variable
-        fixed = self.fixed
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
+        if fixed is not UNSET:
+            field_dict["fixed"] = fixed
         if from_ is not UNSET:
             field_dict["from"] = from_
         if to is not UNSET:
             field_dict["to"] = to
         if variable is not UNSET:
             field_dict["variable"] = variable
-        if fixed is not UNSET:
-            field_dict["fixed"] = fixed
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
+        fixed = d.pop("fixed", UNSET)
+
         from_ = d.pop("from", UNSET)
 
         to = d.pop("to", UNSET)
 
         variable = d.pop("variable", UNSET)
 
-        fixed = d.pop("fixed", UNSET)
-
         rate_factor_itemput_request_schema = cls(
+            fixed=fixed,
             from_=from_,
             to=to,
             variable=variable,
-            fixed=fixed,
         )
 
         rate_factor_itemput_request_schema.additional_properties = d

@@ -12,14 +12,14 @@ T = TypeVar("T", bound="TaxClassItempostRequestSchema")
 class TaxClassItempostRequestSchema:
     """ """
 
-    name: Union[Unset, str] = UNSET
     code: Union[Unset, str] = UNSET
+    name: Union[Unset, str] = UNSET
     type: Union[Unset, TaxClassItempostRequestSchemaType] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        name = self.name
         code = self.code
+        name = self.name
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
@@ -27,10 +27,10 @@ class TaxClassItempostRequestSchema:
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if name is not UNSET:
-            field_dict["name"] = name
         if code is not UNSET:
             field_dict["code"] = code
+        if name is not UNSET:
+            field_dict["name"] = name
         if type is not UNSET:
             field_dict["type"] = type
 
@@ -39,9 +39,9 @@ class TaxClassItempostRequestSchema:
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        name = d.pop("name", UNSET)
-
         code = d.pop("code", UNSET)
+
+        name = d.pop("name", UNSET)
 
         type: Union[Unset, TaxClassItempostRequestSchemaType] = UNSET
         _type = d.pop("type", UNSET)
@@ -49,8 +49,8 @@ class TaxClassItempostRequestSchema:
             type = TaxClassItempostRequestSchemaType(_type)
 
         tax_class_itempost_request_schema = cls(
-            name=name,
             code=code,
+            name=name,
             type=type,
         )
 

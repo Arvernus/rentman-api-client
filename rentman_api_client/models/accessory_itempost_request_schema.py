@@ -11,69 +11,69 @@ T = TypeVar("T", bound="AccessoryItempostRequestSchema")
 class AccessoryItempostRequestSchema:
     """ """
 
-    equipment: Union[Unset, None, str] = UNSET
-    quantity: Union[Unset, int] = UNSET
+    add_as_new_line: Union[Unset, bool] = UNSET
     automatic: Union[Unset, bool] = UNSET
-    skip: Union[Unset, bool] = UNSET
+    equipment: Union[Unset, None, str] = UNSET
     is_free: Union[Unset, bool] = UNSET
     order: Union[Unset, str] = UNSET
-    add_as_new_line: Union[Unset, bool] = UNSET
+    quantity: Union[Unset, int] = UNSET
+    skip: Union[Unset, bool] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        equipment = self.equipment
-        quantity = self.quantity
+        add_as_new_line = self.add_as_new_line
         automatic = self.automatic
-        skip = self.skip
+        equipment = self.equipment
         is_free = self.is_free
         order = self.order
-        add_as_new_line = self.add_as_new_line
+        quantity = self.quantity
+        skip = self.skip
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if equipment is not UNSET:
-            field_dict["equipment"] = equipment
-        if quantity is not UNSET:
-            field_dict["quantity"] = quantity
+        if add_as_new_line is not UNSET:
+            field_dict["add_as_new_line"] = add_as_new_line
         if automatic is not UNSET:
             field_dict["automatic"] = automatic
-        if skip is not UNSET:
-            field_dict["skip"] = skip
+        if equipment is not UNSET:
+            field_dict["equipment"] = equipment
         if is_free is not UNSET:
             field_dict["is_free"] = is_free
         if order is not UNSET:
             field_dict["order"] = order
-        if add_as_new_line is not UNSET:
-            field_dict["add_as_new_line"] = add_as_new_line
+        if quantity is not UNSET:
+            field_dict["quantity"] = quantity
+        if skip is not UNSET:
+            field_dict["skip"] = skip
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        equipment = d.pop("equipment", UNSET)
-
-        quantity = d.pop("quantity", UNSET)
+        add_as_new_line = d.pop("add_as_new_line", UNSET)
 
         automatic = d.pop("automatic", UNSET)
 
-        skip = d.pop("skip", UNSET)
+        equipment = d.pop("equipment", UNSET)
 
         is_free = d.pop("is_free", UNSET)
 
         order = d.pop("order", UNSET)
 
-        add_as_new_line = d.pop("add_as_new_line", UNSET)
+        quantity = d.pop("quantity", UNSET)
+
+        skip = d.pop("skip", UNSET)
 
         accessory_itempost_request_schema = cls(
-            equipment=equipment,
-            quantity=quantity,
+            add_as_new_line=add_as_new_line,
             automatic=automatic,
-            skip=skip,
+            equipment=equipment,
             is_free=is_free,
             order=order,
-            add_as_new_line=add_as_new_line,
+            quantity=quantity,
+            skip=skip,
         )
 
         accessory_itempost_request_schema.additional_properties = d

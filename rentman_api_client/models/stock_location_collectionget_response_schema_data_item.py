@@ -19,156 +19,155 @@ T = TypeVar("T", bound="StockLocationCollectiongetResponseSchemaDataItem")
 class StockLocationCollectiongetResponseSchemaDataItem:
     """ """
 
-    id: Union[Unset, int] = UNSET
+    active: Union[Unset, bool] = UNSET
+    city: Union[Unset, str] = UNSET
+    color: Union[Unset, str] = UNSET
+    country: Union[Unset, StockLocationCollectiongetResponseSchemaDataItemCountry] = UNSET
     created: Union[Unset, None, datetime.datetime] = UNSET
-    modified: Union[Unset, None, datetime.datetime] = UNSET
     creator: Union[Unset, None, str] = UNSET
     displayname: Union[Unset, str] = UNSET
-    name: Union[Unset, str] = UNSET
-    city: Union[Unset, str] = UNSET
-    street: Union[Unset, str] = UNSET
     house_number: Union[Unset, str] = UNSET
+    id: Union[Unset, int] = UNSET
+    in_archive: Union[Unset, bool] = UNSET
+    modified: Union[Unset, None, datetime.datetime] = UNSET
+    name: Union[Unset, str] = UNSET
     postal_code: Union[Unset, str] = UNSET
     state_province: Union[Unset, str] = UNSET
-    country: Union[Unset, StockLocationCollectiongetResponseSchemaDataItemCountry] = UNSET
-    active: Union[Unset, bool] = UNSET
+    street: Union[Unset, str] = UNSET
     type: Union[Unset, StockLocationCollectiongetResponseSchemaDataItemType] = UNSET
-    color: Union[Unset, str] = UNSET
-    in_archive: Union[Unset, bool] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        id = self.id
-        created: Union[Unset, None, str] = UNSET
-        if not isinstance(self.created, Unset):
-            created = self.created.isoformat() if self.created else None
-
-        modified: Union[Unset, None, str] = UNSET
-        if not isinstance(self.modified, Unset):
-            modified = self.modified.isoformat() if self.modified else None
-
-        creator = self.creator
-        displayname = self.displayname
-        name = self.name
+        active = self.active
         city = self.city
-        street = self.street
-        house_number = self.house_number
-        postal_code = self.postal_code
-        state_province = self.state_province
+        color = self.color
         country: Union[Unset, str] = UNSET
         if not isinstance(self.country, Unset):
             country = self.country.value
 
-        active = self.active
+        created: Union[Unset, None, str] = UNSET
+        if not isinstance(self.created, Unset):
+            created = self.created.isoformat() if self.created else None
+
+        creator = self.creator
+        displayname = self.displayname
+        house_number = self.house_number
+        id = self.id
+        in_archive = self.in_archive
+        modified: Union[Unset, None, str] = UNSET
+        if not isinstance(self.modified, Unset):
+            modified = self.modified.isoformat() if self.modified else None
+
+        name = self.name
+        postal_code = self.postal_code
+        state_province = self.state_province
+        street = self.street
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
-        color = self.color
-        in_archive = self.in_archive
-
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if id is not UNSET:
-            field_dict["id"] = id
+        if active is not UNSET:
+            field_dict["active"] = active
+        if city is not UNSET:
+            field_dict["city"] = city
+        if color is not UNSET:
+            field_dict["color"] = color
+        if country is not UNSET:
+            field_dict["country"] = country
         if created is not UNSET:
             field_dict["created"] = created
-        if modified is not UNSET:
-            field_dict["modified"] = modified
         if creator is not UNSET:
             field_dict["creator"] = creator
         if displayname is not UNSET:
             field_dict["displayname"] = displayname
-        if name is not UNSET:
-            field_dict["name"] = name
-        if city is not UNSET:
-            field_dict["city"] = city
-        if street is not UNSET:
-            field_dict["street"] = street
         if house_number is not UNSET:
             field_dict["house_number"] = house_number
+        if id is not UNSET:
+            field_dict["id"] = id
+        if in_archive is not UNSET:
+            field_dict["in_archive"] = in_archive
+        if modified is not UNSET:
+            field_dict["modified"] = modified
+        if name is not UNSET:
+            field_dict["name"] = name
         if postal_code is not UNSET:
             field_dict["postal_code"] = postal_code
         if state_province is not UNSET:
             field_dict["state_province"] = state_province
-        if country is not UNSET:
-            field_dict["country"] = country
-        if active is not UNSET:
-            field_dict["active"] = active
+        if street is not UNSET:
+            field_dict["street"] = street
         if type is not UNSET:
             field_dict["type"] = type
-        if color is not UNSET:
-            field_dict["color"] = color
-        if in_archive is not UNSET:
-            field_dict["in_archive"] = in_archive
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        id = d.pop("id", UNSET)
-
-        created = None
-        _created = d.pop("created", UNSET)
-        if _created is not None and not isinstance(_created, Unset):
-            created = isoparse(_created)
-
-        modified = None
-        _modified = d.pop("modified", UNSET)
-        if _modified is not None and not isinstance(_modified, Unset):
-            modified = isoparse(_modified)
-
-        creator = d.pop("creator", UNSET)
-
-        displayname = d.pop("displayname", UNSET)
-
-        name = d.pop("name", UNSET)
+        active = d.pop("active", UNSET)
 
         city = d.pop("city", UNSET)
 
-        street = d.pop("street", UNSET)
-
-        house_number = d.pop("house_number", UNSET)
-
-        postal_code = d.pop("postal_code", UNSET)
-
-        state_province = d.pop("state_province", UNSET)
+        color = d.pop("color", UNSET)
 
         country: Union[Unset, StockLocationCollectiongetResponseSchemaDataItemCountry] = UNSET
         _country = d.pop("country", UNSET)
         if not isinstance(_country, Unset):
             country = StockLocationCollectiongetResponseSchemaDataItemCountry(_country)
 
-        active = d.pop("active", UNSET)
+        created = None
+        _created = d.pop("created", UNSET)
+        if _created is not None and not isinstance(_created, Unset):
+            created = isoparse(_created)
+
+        creator = d.pop("creator", UNSET)
+
+        displayname = d.pop("displayname", UNSET)
+
+        house_number = d.pop("house_number", UNSET)
+
+        id = d.pop("id", UNSET)
+
+        in_archive = d.pop("in_archive", UNSET)
+
+        modified = None
+        _modified = d.pop("modified", UNSET)
+        if _modified is not None and not isinstance(_modified, Unset):
+            modified = isoparse(_modified)
+
+        name = d.pop("name", UNSET)
+
+        postal_code = d.pop("postal_code", UNSET)
+
+        state_province = d.pop("state_province", UNSET)
+
+        street = d.pop("street", UNSET)
 
         type: Union[Unset, StockLocationCollectiongetResponseSchemaDataItemType] = UNSET
         _type = d.pop("type", UNSET)
         if not isinstance(_type, Unset):
             type = StockLocationCollectiongetResponseSchemaDataItemType(_type)
 
-        color = d.pop("color", UNSET)
-
-        in_archive = d.pop("in_archive", UNSET)
-
         stock_location_collectionget_response_schema_data_item = cls(
-            id=id,
+            active=active,
+            city=city,
+            color=color,
+            country=country,
             created=created,
-            modified=modified,
             creator=creator,
             displayname=displayname,
-            name=name,
-            city=city,
-            street=street,
             house_number=house_number,
+            id=id,
+            in_archive=in_archive,
+            modified=modified,
+            name=name,
             postal_code=postal_code,
             state_province=state_province,
-            country=country,
-            active=active,
+            street=street,
             type=type,
-            color=color,
-            in_archive=in_archive,
         )
 
         stock_location_collectionget_response_schema_data_item.additional_properties = d

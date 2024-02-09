@@ -13,123 +13,123 @@ T = TypeVar("T", bound="AccessoryCollectiongetResponseSchemaDataItem")
 class AccessoryCollectiongetResponseSchemaDataItem:
     """ """
 
-    id: Union[Unset, int] = UNSET
+    add_as_new_line: Union[Unset, bool] = UNSET
+    automatic: Union[Unset, bool] = UNSET
     created: Union[Unset, None, datetime.datetime] = UNSET
-    modified: Union[Unset, None, datetime.datetime] = UNSET
     creator: Union[Unset, None, str] = UNSET
     displayname: Union[Unset, str] = UNSET
-    parent_equipment: Union[Unset, str] = UNSET
     equipment: Union[Unset, None, str] = UNSET
-    quantity: Union[Unset, int] = UNSET
-    automatic: Union[Unset, bool] = UNSET
-    skip: Union[Unset, bool] = UNSET
+    id: Union[Unset, int] = UNSET
     is_free: Union[Unset, bool] = UNSET
+    modified: Union[Unset, None, datetime.datetime] = UNSET
     order: Union[Unset, str] = UNSET
-    add_as_new_line: Union[Unset, bool] = UNSET
+    parent_equipment: Union[Unset, str] = UNSET
+    quantity: Union[Unset, int] = UNSET
+    skip: Union[Unset, bool] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        id = self.id
+        add_as_new_line = self.add_as_new_line
+        automatic = self.automatic
         created: Union[Unset, None, str] = UNSET
         if not isinstance(self.created, Unset):
             created = self.created.isoformat() if self.created else None
 
+        creator = self.creator
+        displayname = self.displayname
+        equipment = self.equipment
+        id = self.id
+        is_free = self.is_free
         modified: Union[Unset, None, str] = UNSET
         if not isinstance(self.modified, Unset):
             modified = self.modified.isoformat() if self.modified else None
 
-        creator = self.creator
-        displayname = self.displayname
-        parent_equipment = self.parent_equipment
-        equipment = self.equipment
-        quantity = self.quantity
-        automatic = self.automatic
-        skip = self.skip
-        is_free = self.is_free
         order = self.order
-        add_as_new_line = self.add_as_new_line
+        parent_equipment = self.parent_equipment
+        quantity = self.quantity
+        skip = self.skip
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if id is not UNSET:
-            field_dict["id"] = id
+        if add_as_new_line is not UNSET:
+            field_dict["add_as_new_line"] = add_as_new_line
+        if automatic is not UNSET:
+            field_dict["automatic"] = automatic
         if created is not UNSET:
             field_dict["created"] = created
-        if modified is not UNSET:
-            field_dict["modified"] = modified
         if creator is not UNSET:
             field_dict["creator"] = creator
         if displayname is not UNSET:
             field_dict["displayname"] = displayname
-        if parent_equipment is not UNSET:
-            field_dict["parent_equipment"] = parent_equipment
         if equipment is not UNSET:
             field_dict["equipment"] = equipment
-        if quantity is not UNSET:
-            field_dict["quantity"] = quantity
-        if automatic is not UNSET:
-            field_dict["automatic"] = automatic
-        if skip is not UNSET:
-            field_dict["skip"] = skip
+        if id is not UNSET:
+            field_dict["id"] = id
         if is_free is not UNSET:
             field_dict["is_free"] = is_free
+        if modified is not UNSET:
+            field_dict["modified"] = modified
         if order is not UNSET:
             field_dict["order"] = order
-        if add_as_new_line is not UNSET:
-            field_dict["add_as_new_line"] = add_as_new_line
+        if parent_equipment is not UNSET:
+            field_dict["parent_equipment"] = parent_equipment
+        if quantity is not UNSET:
+            field_dict["quantity"] = quantity
+        if skip is not UNSET:
+            field_dict["skip"] = skip
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        id = d.pop("id", UNSET)
+        add_as_new_line = d.pop("add_as_new_line", UNSET)
+
+        automatic = d.pop("automatic", UNSET)
 
         created = None
         _created = d.pop("created", UNSET)
         if _created is not None and not isinstance(_created, Unset):
             created = isoparse(_created)
 
+        creator = d.pop("creator", UNSET)
+
+        displayname = d.pop("displayname", UNSET)
+
+        equipment = d.pop("equipment", UNSET)
+
+        id = d.pop("id", UNSET)
+
+        is_free = d.pop("is_free", UNSET)
+
         modified = None
         _modified = d.pop("modified", UNSET)
         if _modified is not None and not isinstance(_modified, Unset):
             modified = isoparse(_modified)
 
-        creator = d.pop("creator", UNSET)
-
-        displayname = d.pop("displayname", UNSET)
+        order = d.pop("order", UNSET)
 
         parent_equipment = d.pop("parent_equipment", UNSET)
 
-        equipment = d.pop("equipment", UNSET)
-
         quantity = d.pop("quantity", UNSET)
-
-        automatic = d.pop("automatic", UNSET)
 
         skip = d.pop("skip", UNSET)
 
-        is_free = d.pop("is_free", UNSET)
-
-        order = d.pop("order", UNSET)
-
-        add_as_new_line = d.pop("add_as_new_line", UNSET)
-
         accessory_collectionget_response_schema_data_item = cls(
-            id=id,
+            add_as_new_line=add_as_new_line,
+            automatic=automatic,
             created=created,
-            modified=modified,
             creator=creator,
             displayname=displayname,
-            parent_equipment=parent_equipment,
             equipment=equipment,
-            quantity=quantity,
-            automatic=automatic,
-            skip=skip,
+            id=id,
             is_free=is_free,
+            modified=modified,
             order=order,
-            add_as_new_line=add_as_new_line,
+            parent_equipment=parent_equipment,
+            quantity=quantity,
+            skip=skip,
         )
 
         accessory_collectionget_response_schema_data_item.additional_properties = d

@@ -19,145 +19,136 @@ T = TypeVar("T", bound="CrewAvailabilityItemgetResponseSchemaData")
 class CrewAvailabilityItemgetResponseSchemaData:
     """All the data about the requested items"""
 
-    id: Union[Unset, int] = UNSET
     created: Union[Unset, None, datetime.datetime] = UNSET
-    modified: Union[Unset, None, datetime.datetime] = UNSET
     creator: Union[Unset, None, str] = UNSET
-    displayname: Union[Unset, str] = UNSET
-    last_updater: Union[Unset, None, str] = UNSET
-    last_updated: Union[Unset, None, datetime.datetime] = UNSET
-    start: Union[Unset, None, datetime.datetime] = UNSET
-    end: Union[Unset, None, datetime.datetime] = UNSET
     crewmember: Union[Unset, str] = UNSET
-    status: Union[Unset, CrewAvailabilityItemgetResponseSchemaDataStatus] = UNSET
-    remark: Union[Unset, str] = UNSET
-    recurrence_interval_unit: Union[Unset, CrewAvailabilityItemgetResponseSchemaDataRecurrenceIntervalUnit] = UNSET
+    displayname: Union[Unset, str] = UNSET
+    end: Union[Unset, None, datetime.datetime] = UNSET
+    id: Union[Unset, int] = UNSET
+    last_updated: Union[Unset, None, datetime.datetime] = UNSET
+    last_updater: Union[Unset, None, str] = UNSET
+    modified: Union[Unset, None, datetime.datetime] = UNSET
     recurrence_enddate: Union[Unset, None, str] = UNSET
     recurrence_interval: Union[Unset, int] = UNSET
+    recurrence_interval_unit: Union[Unset, CrewAvailabilityItemgetResponseSchemaDataRecurrenceIntervalUnit] = UNSET
     recurrent_group: Union[Unset, int] = UNSET
+    remark: Union[Unset, str] = UNSET
+    start: Union[Unset, None, datetime.datetime] = UNSET
+    status: Union[Unset, CrewAvailabilityItemgetResponseSchemaDataStatus] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        id = self.id
         created: Union[Unset, None, str] = UNSET
         if not isinstance(self.created, Unset):
             created = self.created.isoformat() if self.created else None
 
-        modified: Union[Unset, None, str] = UNSET
-        if not isinstance(self.modified, Unset):
-            modified = self.modified.isoformat() if self.modified else None
-
         creator = self.creator
+        crewmember = self.crewmember
         displayname = self.displayname
-        last_updater = self.last_updater
-        last_updated: Union[Unset, None, str] = UNSET
-        if not isinstance(self.last_updated, Unset):
-            last_updated = self.last_updated.isoformat() if self.last_updated else None
-
-        start: Union[Unset, None, str] = UNSET
-        if not isinstance(self.start, Unset):
-            start = self.start.isoformat() if self.start else None
-
         end: Union[Unset, None, str] = UNSET
         if not isinstance(self.end, Unset):
             end = self.end.isoformat() if self.end else None
 
-        crewmember = self.crewmember
-        status: Union[Unset, str] = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        id = self.id
+        last_updated: Union[Unset, None, str] = UNSET
+        if not isinstance(self.last_updated, Unset):
+            last_updated = self.last_updated.isoformat() if self.last_updated else None
 
-        remark = self.remark
+        last_updater = self.last_updater
+        modified: Union[Unset, None, str] = UNSET
+        if not isinstance(self.modified, Unset):
+            modified = self.modified.isoformat() if self.modified else None
+
+        recurrence_enddate = self.recurrence_enddate
+        recurrence_interval = self.recurrence_interval
         recurrence_interval_unit: Union[Unset, str] = UNSET
         if not isinstance(self.recurrence_interval_unit, Unset):
             recurrence_interval_unit = self.recurrence_interval_unit.value
 
-        recurrence_enddate = self.recurrence_enddate
-        recurrence_interval = self.recurrence_interval
         recurrent_group = self.recurrent_group
+        remark = self.remark
+        start: Union[Unset, None, str] = UNSET
+        if not isinstance(self.start, Unset):
+            start = self.start.isoformat() if self.start else None
+
+        status: Union[Unset, str] = UNSET
+        if not isinstance(self.status, Unset):
+            status = self.status.value
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if id is not UNSET:
-            field_dict["id"] = id
         if created is not UNSET:
             field_dict["created"] = created
-        if modified is not UNSET:
-            field_dict["modified"] = modified
         if creator is not UNSET:
             field_dict["creator"] = creator
-        if displayname is not UNSET:
-            field_dict["displayname"] = displayname
-        if last_updater is not UNSET:
-            field_dict["last_updater"] = last_updater
-        if last_updated is not UNSET:
-            field_dict["last_updated"] = last_updated
-        if start is not UNSET:
-            field_dict["start"] = start
-        if end is not UNSET:
-            field_dict["end"] = end
         if crewmember is not UNSET:
             field_dict["crewmember"] = crewmember
-        if status is not UNSET:
-            field_dict["status"] = status
-        if remark is not UNSET:
-            field_dict["remark"] = remark
-        if recurrence_interval_unit is not UNSET:
-            field_dict["recurrence_interval_unit"] = recurrence_interval_unit
+        if displayname is not UNSET:
+            field_dict["displayname"] = displayname
+        if end is not UNSET:
+            field_dict["end"] = end
+        if id is not UNSET:
+            field_dict["id"] = id
+        if last_updated is not UNSET:
+            field_dict["last_updated"] = last_updated
+        if last_updater is not UNSET:
+            field_dict["last_updater"] = last_updater
+        if modified is not UNSET:
+            field_dict["modified"] = modified
         if recurrence_enddate is not UNSET:
             field_dict["recurrence_enddate"] = recurrence_enddate
         if recurrence_interval is not UNSET:
             field_dict["recurrence_interval"] = recurrence_interval
+        if recurrence_interval_unit is not UNSET:
+            field_dict["recurrence_interval_unit"] = recurrence_interval_unit
         if recurrent_group is not UNSET:
             field_dict["recurrent_group"] = recurrent_group
+        if remark is not UNSET:
+            field_dict["remark"] = remark
+        if start is not UNSET:
+            field_dict["start"] = start
+        if status is not UNSET:
+            field_dict["status"] = status
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         d = src_dict.copy()
-        id = d.pop("id", UNSET)
-
         created = None
         _created = d.pop("created", UNSET)
         if _created is not None and not isinstance(_created, Unset):
             created = isoparse(_created)
 
-        modified = None
-        _modified = d.pop("modified", UNSET)
-        if _modified is not None and not isinstance(_modified, Unset):
-            modified = isoparse(_modified)
-
         creator = d.pop("creator", UNSET)
 
+        crewmember = d.pop("crewmember", UNSET)
+
         displayname = d.pop("displayname", UNSET)
-
-        last_updater = d.pop("last_updater", UNSET)
-
-        last_updated = None
-        _last_updated = d.pop("last_updated", UNSET)
-        if _last_updated is not None and not isinstance(_last_updated, Unset):
-            last_updated = isoparse(_last_updated)
-
-        start = None
-        _start = d.pop("start", UNSET)
-        if _start is not None and not isinstance(_start, Unset):
-            start = isoparse(_start)
 
         end = None
         _end = d.pop("end", UNSET)
         if _end is not None and not isinstance(_end, Unset):
             end = isoparse(_end)
 
-        crewmember = d.pop("crewmember", UNSET)
+        id = d.pop("id", UNSET)
 
-        status: Union[Unset, CrewAvailabilityItemgetResponseSchemaDataStatus] = UNSET
-        _status = d.pop("status", UNSET)
-        if not isinstance(_status, Unset):
-            status = CrewAvailabilityItemgetResponseSchemaDataStatus(_status)
+        last_updated = None
+        _last_updated = d.pop("last_updated", UNSET)
+        if _last_updated is not None and not isinstance(_last_updated, Unset):
+            last_updated = isoparse(_last_updated)
 
-        remark = d.pop("remark", UNSET)
+        last_updater = d.pop("last_updater", UNSET)
+
+        modified = None
+        _modified = d.pop("modified", UNSET)
+        if _modified is not None and not isinstance(_modified, Unset):
+            modified = isoparse(_modified)
+
+        recurrence_enddate = d.pop("recurrence_enddate", UNSET)
+
+        recurrence_interval = d.pop("recurrence_interval", UNSET)
 
         recurrence_interval_unit: Union[Unset, CrewAvailabilityItemgetResponseSchemaDataRecurrenceIntervalUnit] = UNSET
         _recurrence_interval_unit = d.pop("recurrence_interval_unit", UNSET)
@@ -166,29 +157,37 @@ class CrewAvailabilityItemgetResponseSchemaData:
                 _recurrence_interval_unit
             )
 
-        recurrence_enddate = d.pop("recurrence_enddate", UNSET)
-
-        recurrence_interval = d.pop("recurrence_interval", UNSET)
-
         recurrent_group = d.pop("recurrent_group", UNSET)
 
+        remark = d.pop("remark", UNSET)
+
+        start = None
+        _start = d.pop("start", UNSET)
+        if _start is not None and not isinstance(_start, Unset):
+            start = isoparse(_start)
+
+        status: Union[Unset, CrewAvailabilityItemgetResponseSchemaDataStatus] = UNSET
+        _status = d.pop("status", UNSET)
+        if not isinstance(_status, Unset):
+            status = CrewAvailabilityItemgetResponseSchemaDataStatus(_status)
+
         crew_availability_itemget_response_schema_data = cls(
-            id=id,
             created=created,
-            modified=modified,
             creator=creator,
-            displayname=displayname,
-            last_updater=last_updater,
-            last_updated=last_updated,
-            start=start,
-            end=end,
             crewmember=crewmember,
-            status=status,
-            remark=remark,
-            recurrence_interval_unit=recurrence_interval_unit,
+            displayname=displayname,
+            end=end,
+            id=id,
+            last_updated=last_updated,
+            last_updater=last_updater,
+            modified=modified,
             recurrence_enddate=recurrence_enddate,
             recurrence_interval=recurrence_interval,
+            recurrence_interval_unit=recurrence_interval_unit,
             recurrent_group=recurrent_group,
+            remark=remark,
+            start=start,
+            status=status,
         )
 
         crew_availability_itemget_response_schema_data.additional_properties = d
