@@ -3,7 +3,7 @@ from typing import Any, Dict, Optional
 import httpx
 
 from ...client import Client
-from ...models.files_collectionget_response_schema import FilesCollectiongetResponseSchema
+from ...models.file_collectionget_response_schema import FileCollectiongetResponseSchema
 from ...types import Response
 
 
@@ -25,15 +25,15 @@ def _get_kwargs(
     }
 
 
-def _parse_response(*, response: httpx.Response) -> Optional[FilesCollectiongetResponseSchema]:
+def _parse_response(*, response: httpx.Response) -> Optional[FileCollectiongetResponseSchema]:
     if response.status_code == 200:
-        response_200 = FilesCollectiongetResponseSchema.from_dict(response.json())
+        response_200 = FileCollectiongetResponseSchema.from_dict(response.json())
 
         return response_200
     return None
 
 
-def _build_response(*, response: httpx.Response) -> Response[FilesCollectiongetResponseSchema]:
+def _build_response(*, response: httpx.Response) -> Response[FileCollectiongetResponseSchema]:
     return Response(
         status_code=response.status_code,
         content=response.content,
@@ -46,7 +46,7 @@ def sync_detailed(
     *,
     client: Client,
     id: int,
-) -> Response[FilesCollectiongetResponseSchema]:
+) -> Response[FileCollectiongetResponseSchema]:
     kwargs = _get_kwargs(
         client=client,
         id=id,
@@ -63,7 +63,7 @@ def sync(
     *,
     client: Client,
     id: int,
-) -> Optional[FilesCollectiongetResponseSchema]:
+) -> Optional[FileCollectiongetResponseSchema]:
     """ """
 
     return sync_detailed(
@@ -76,7 +76,7 @@ async def asyncio_detailed(
     *,
     client: Client,
     id: int,
-) -> Response[FilesCollectiongetResponseSchema]:
+) -> Response[FileCollectiongetResponseSchema]:
     kwargs = _get_kwargs(
         client=client,
         id=id,
@@ -92,7 +92,7 @@ async def asyncio(
     *,
     client: Client,
     id: int,
-) -> Optional[FilesCollectiongetResponseSchema]:
+) -> Optional[FileCollectiongetResponseSchema]:
     """ """
 
     return (
