@@ -41039,24 +41039,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -41111,24 +41093,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41181,25 +41145,6 @@ paths:
     post:
       description: ''
       operationId: Appointment_collection_post
-      parameters:
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41227,24 +41172,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -41299,24 +41226,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41382,24 +41291,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41460,24 +41351,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -41532,24 +41405,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41641,25 +41496,6 @@ paths:
     post:
       description: ''
       operationId: Contact_collection_post
-      parameters:
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41687,24 +41523,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -41759,24 +41577,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -41842,24 +41642,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -42109,24 +41891,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -42181,24 +41945,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -42375,24 +42121,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -42531,24 +42259,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -42603,24 +42313,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -43025,24 +42717,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -43546,24 +43220,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -43734,24 +43390,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -44328,24 +43966,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -44400,24 +44020,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -44470,25 +44072,6 @@ paths:
     post:
       description: ''
       operationId: ProjectRequest_collection_post
-      parameters:
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -44516,24 +44099,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -44588,24 +44153,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -44671,24 +44218,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -44865,24 +44394,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
@@ -46137,24 +45648,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       responses:
         '200':
           description: Successful request (note that the 'data' field can be expanded)
@@ -46209,24 +45702,6 @@ paths:
           type: integer
         required: true
         description: Numeric ID of the itemtype
-      - in: query
-        name: offset
-        schema:
-          type: integer
-          minimum: 0
-          default: 0
-        required: false
-        description: The number of items to skip before starting to collect the result
-          set.
-      - in: query
-        name: limit
-        schema:
-          type: integer
-          minimum: 0
-          default: 300
-          maximum: 300
-        required: false
-        description: The number of items to return.
       requestBody:
         content:
           application/json:
