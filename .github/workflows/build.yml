@@ -5,27 +5,27 @@ on: [push]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+  runs-on: ubuntu-latest
 
-    steps:
-        - uses: actions/checkout@v4
-        - name: Set up Python
-            # This is the version of the action for setting up Python, not the Python version.
-            uses: actions/setup-python@v4
-            with:
-            # Semantic version range syntax or exact version of a Python version
-            python-version: '3.6'
-        # You can test your matrix by printing the current Python version
-        - name: Display Python version
-            run: python -c "import sys; print(sys.version)"
-        - name: Install dependencies
-            run: |
-                python -m pip install --upgrade pip
-                pip install -r requirements.txt
-        - name: Pre Build
-            run: |
-                python pre_build.py
-        - name: Build
-            run: |
-                cd ..
-                openapi-python-client update --path rentman-api-client/oas_changed.yml
+  steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      # This is the version of the action for setting up Python, not the Python version.
+      uses: actions/setup-python@v4
+      with:
+        # Semantic version range syntax or exact version of a Python version
+        python-version: '3.6'
+    # You can test your matrix by printing the current Python version
+    - name: Display Python version
+      run: python -c "import sys; print(sys.version)"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Pre Build
+      run: |
+        python pre_build.py
+    - name: Build
+      run: |
+        cd ..
+        openapi-python-client update --path rentman-api-client/oas_changed.yml
