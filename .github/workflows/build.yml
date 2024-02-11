@@ -22,8 +22,7 @@ jobs:
           pip install -r requirements.txt
       - name: Pre Build
         run: |
-          ls
-          python pre_build.py
+          python prebuild.py
       - name: Build
         run: |
           cd ..
