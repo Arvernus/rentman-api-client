@@ -1,5 +1,9 @@
 {
     "recommendations": [
-        "andrewbutson.vscode-openapi-viewer"
+        "andrewbutson.vscode-openapi-viewer",
+        "ms-python.python",
+        "donjayamanne.python-environment-manager",
+        "redocly.openapi-vs-code",
+        "streetsidesoftware.code-spell-checker-german"
     ]
 }
